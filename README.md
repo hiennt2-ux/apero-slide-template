@@ -199,9 +199,12 @@ Node.js 18 trở lên. Không cần cài gì khác.
 
 Mã nguồn: MIT — xem [LICENSE](LICENSE).
 
-**Lưu ý riêng về asset:** logo Apero, ảnh nền và các file trong `public/pitch/` là tài sản
-thương hiệu của Apero Technologies Group, **không** nằm trong giấy phép MIT. Nếu bạn dùng
-template cho tổ chức khác, hãy thay chúng bằng asset của bạn.
+**Lưu ý riêng về asset trong `public/pitch/`:**
+
+| File | Giấy phép |
+|---|---|
+| `apero-logo.png`, `bg-cover.png`, `bg-content.png`, `bg-arc.jpg`, `motif-orbs.png` | Tài sản thương hiệu Apero Technologies Group — **không** thuộc MIT. Dùng cho tổ chức khác thì thay bằng asset của bạn. |
+| `hero-glass.jpg`, `img-chip.jpg`, `img-portrait.jpg` | Đồ hoạ trừu tượng sinh từ SVG theo bảng màu brand — **thuộc MIT**, dùng/sửa/thay tự do. |
 
 Font đi kèm giữ giấy phép gốc: Clash Display (ITF Free Font License), Montserrat và
 Be Vietnam Pro (SIL Open Font License 1.1).
