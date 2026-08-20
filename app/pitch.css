@@ -1,0 +1,639 @@
+/* ==========================================================================
+   PITCH DECK — BỐ CỤC
+   --------------------------------------------------------------------------
+   File này chỉ mô tả BỐ CỤC & KÍCH THƯỚC. Mọi màu lấy từ token trong
+   theme.css (rgb(var(--c-*)) / var(--ink) …) — KHÔNG viết màu cứng ở đây,
+   để đổi theme không phải sửa file này.
+
+   Layout dựng lại theo bản gốc "Material/Present Apero.pptx" + trang Canva.
+   Chữ dùng đơn vị theo chiều cao khung (cqh) nên slide co giãn đồng bộ khi
+   đổi kích thước cửa sổ hoặc bật toàn màn hình.
+   ========================================================================== */
+
+/* Với pitch deck, bỏ lề rộng của .stage để slide gần như full màn hình. */
+.stage-pitch {
+  padding: 1.2vh 1.2vw 72px;
+  overflow: hidden;
+}
+
+/* Khung chứa mọi slide pitch: tỉ lệ 16:9, là container để dùng cqh. */
+.pd-stage {
+  container-type: size;
+  width: min(100%, calc((100vh - 84px) * 16 / 9));
+  aspect-ratio: 16 / 9;
+  margin: auto;
+  position: relative;
+}
+
+.pd-slide {
+  position: absolute;
+  inset: 0;
+  padding: 6.5cqh 6cqh;
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font);
+  color: var(--ink);
+  overflow: hidden; /* cắt gọn vòng cung / ảnh tràn, như khung slide thật */
+  animation: pd-in 0.45s ease both;
+}
+
+@keyframes pd-in {
+  from { opacity: 0; transform: translateY(1.2cqh); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* ---------------------------------------------------------------- chữ nền */
+.pd-title {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: 8.2cqh;
+  line-height: 1.02;
+  letter-spacing: -0.015em;
+  margin: 0;
+}
+
+/* Tiêu đề 2 dòng: dòng trên trắng, dòng dưới tím nhấn. */
+.pd-title-stack {
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: 8.2cqh;
+  line-height: 1.0;
+  letter-spacing: -0.015em;
+  margin: 0;
+}
+.pd-title-top { color: var(--ink); }
+.pd-title-accent { color: rgb(var(--c-accent)); }
+
+/* Tiêu đề nhấn màu cam — dùng cho heading trong thẻ và cột phải. */
+.pd-accent-heading {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 4.1cqh;
+  line-height: 1.15;
+  color: rgb(var(--c-warm));
+  margin: 0 0 1.6cqh;
+}
+
+.pd-lead {
+  font-size: 2.5cqh;
+  line-height: 1.55;
+  font-weight: 300;
+  color: var(--ink);
+  margin: 3cqh 0 0;
+  max-width: 46ch;
+}
+.pd-lead-wide { max-width: 92ch; margin: 2.4cqh 0 0; }
+
+.pd-paras { display: grid; gap: 2.2cqh; margin-top: 3cqh; }
+.pd-paras p {
+  margin: 0;
+  font-size: 2.5cqh;
+  line-height: 1.55;
+  font-weight: 300;
+  max-width: 42ch;
+}
+
+/* -------------------------------------------------- đầu slide + motif góc */
+.pd-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 4cqh;
+  flex: 0 0 auto;
+}
+.pd-motif {
+  width: 21cqh;
+  height: auto;
+  flex: 0 0 auto;
+  opacity: 0.95;
+  pointer-events: none;
+}
+
+/* ------------------------------------------------------------------- logo */
+.pd-logo { height: auto; display: block; }
+.pd-logo-cover { width: 40cqh; margin-bottom: 6cqh; }
+.pd-logo-closing { width: 44cqh; margin: 0 auto 6cqh; }
+
+/* -------------------------------------------------------- quả cầu số (orb)
+   Gradient cam → tím → tím đậm, đúng motif quả cầu của bản gốc. */
+.pd-orb {
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  flex: 0 0 auto;
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--ink);
+  background:
+    radial-gradient(120% 120% at 18% 68%,
+      rgb(var(--c-warm)) 0%,
+      rgb(var(--c-accent-deep)) 46%,
+      rgb(var(--c-page)) 100%);
+  box-shadow: 0 0.8cqh 2.4cqh rgb(var(--c-shadow) / 0.45);
+}
+.pd-orb-sm { width: 4.2cqh;  height: 4.2cqh;  font-size: 1.6cqh; }
+.pd-orb-md { width: 7cqh;    height: 7cqh;    font-size: 2.6cqh; }
+.pd-orb-lg { width: 9.6cqh;  height: 9.6cqh;  font-size: 3.4cqh; }
+
+/* ============================================================ 01 · bìa */
+.pd-cover { flex-direction: row; align-items: stretch; gap: 0; padding: 0; }
+/* Bìa có nền riêng: gradient tím sáng, không dùng nền tối của slide nội dung. */
+.pd-cover::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(78% 96% at 6% 44%, rgb(var(--c-accent-deep) / 0.95), transparent 72%),
+    linear-gradient(112deg,
+      rgb(var(--c-accent-deep)) 0%,
+      rgb(var(--c-accent-deep) / 0.72) 38%,
+      rgb(var(--c-page) / 0.9) 68%,
+      rgb(var(--c-page)) 100%);
+}
+.pd-cover-left {
+  position: relative;
+  flex: 1 1 54%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 6cqh 4cqh 6cqh 7cqh;
+  z-index: 1;
+}
+.pd-cover-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 15cqh;
+  line-height: 0.98;
+  letter-spacing: -0.025em;
+  margin: 0;
+}
+.pd-cover-sub {
+  font-size: 2.6cqh;
+  line-height: 1.5;
+  font-weight: 300;
+  color: var(--ink-dim);
+  margin: 3cqh 0 0;
+  max-width: 34ch;
+}
+.pd-chips { display: flex; flex-wrap: wrap; gap: 1.4cqh; margin-top: 4cqh; }
+.pd-chip {
+  font-size: 1.8cqh;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 1.1cqh 2.2cqh;
+  border-radius: 999px;
+  border: 1px solid rgb(var(--c-accent) / 0.45);
+  background: rgb(var(--c-accent) / 0.12);
+  color: rgb(var(--c-accent-pale));
+}
+/* Ảnh hero tràn hết cạnh phải, cạnh trên và cạnh dưới (full-bleed). */
+.pd-cover-right {
+  position: relative;
+  flex: 1 1 46%;
+  overflow: hidden;
+}
+.pd-cover-hero {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: right center;
+  display: block;
+}
+
+/* ================================================ 02 · tiêu đề + danh sách
+   Nền là ẢNH GỐC của bản mẫu (`/pitch/bg-arc.jpg`, lấy từ Present Apero.pptx):
+   nửa trái tím, nửa phải đen, giữa hai nửa là vòng cung phát sáng.
+   Trước đây phần này dựng bằng CSS (gradient + ellipse có mask + drop-shadow);
+   giờ dùng ảnh thật nên bỏ hẳn, đỡ lệch so với bản mẫu.
+
+   Lưu ý: ảnh có màu cố định (tím `#4E018F`), KHÔNG đổi theo theme. Đây là
+   đánh đổi có ý thức khi dùng ảnh thật thay vì vẽ bằng token màu. Chữ và số
+   trên slide vẫn lấy màu từ token nên vẫn đổi theo theme.
+   ========================================================================== */
+.pd-numbers {
+  flex-direction: row;
+  align-items: center;
+  gap: 0;
+  background-image: url("/pitch/bg-arc.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.pd-numbers-left { flex: 0 0 40%; }
+.pd-numbers .pd-lead { max-width: 26ch; }
+
+.pd-numbers-list {
+  flex: 0 0 43%;
+  list-style: none;
+  /* margin-left:auto đẩy cột sang sát phải, chừa khe giữa cho vòng cung.
+     Phải khai báo trong cùng shorthand, không thì `margin: 0` ghi đè. */
+  margin: 0 0 0 auto;
+  padding: 0;
+  display: grid;
+}
+.pd-numbers-item {
+  display: flex;
+  align-items: center;
+  gap: 3.4cqh;
+  padding: 3.6cqh 0;
+}
+/* Đường kẻ kiểu kim loại: sáng gần trắng ở giữa, tắt dần về hai đầu. */
+.pd-numbers-item + .pd-numbers-item { position: relative; }
+.pd-numbers-item + .pd-numbers-item::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 0.28cqh;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    rgb(var(--c-accent) / 0) 0%,
+    rgb(var(--c-accent-pale) / 0.75) 10%,
+    rgb(var(--c-ink)) 42%,
+    rgb(var(--c-ink)) 56%,
+    rgb(var(--c-accent-pale) / 0.75) 90%,
+    rgb(var(--c-accent) / 0) 100%);
+  box-shadow: 0 0 0.7cqh rgb(var(--c-ink) / 0.5);
+}
+.pd-numbers-item p {
+  margin: 0;
+  font-size: 2.5cqh;
+  line-height: 1.42;
+  font-weight: 300;
+  max-width: 30ch;
+}
+/* Số rất lớn, màu tím đậm nên chìm vào nền — đúng kiểu bản mẫu. */
+.pd-bignum {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 11cqh;
+  line-height: 0.9;
+  flex: 0 0 auto;
+  min-width: 7.5cqh;
+  text-align: center;
+  background: linear-gradient(
+    170deg,
+    rgb(var(--c-accent-lit)) 0%,
+    rgb(var(--c-accent-deep)) 46%,
+    rgb(var(--c-accent-deep) / 0.35) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ================================================= 03 · câu chuyện + ảnh */
+.pd-story { flex-direction: row; align-items: center; gap: 6cqh; }
+.pd-story-left { flex: 1 1 50%; }
+.pd-story-right {
+  flex: 1 1 50%;
+  display: flex;
+  justify-content: flex-end;
+}
+/* Motif neo ngang tiêu đề, không đẩy bố cục. */
+.pd-story > .pd-motif { position: absolute; left: 40%; top: 12cqh; }
+
+/* Khung ảnh viền đôi. */
+.pd-frame {
+  padding: 1.1cqh;
+  border: 1px solid rgb(var(--c-accent) / 0.5);
+  background: rgb(var(--c-panel) / 0.85);
+  flex: 0 0 auto;
+}
+.pd-frame-portrait { width: 46cqh; }
+.pd-frame-landscape { width: 100%; max-width: 74cqh; }
+.pd-frame-img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.pd-frame-portrait .pd-frame-img { aspect-ratio: 3 / 4; }
+.pd-frame-landscape .pd-frame-img { aspect-ratio: 4 / 3; }
+.pd-frame-empty {
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 3cqh;
+  min-height: 26cqh;
+  border: 1px dashed rgb(var(--c-accent) / 0.5);
+  color: var(--ink-faint);
+  font-size: 2cqh;
+  line-height: 1.4;
+}
+.pd-frame-portrait .pd-frame-empty { aspect-ratio: 3 / 4; }
+.pd-frame-landscape .pd-frame-empty { aspect-ratio: 4 / 3; }
+
+/* ======================================================== 04/10 · thẻ dọc */
+.pd-card-grid {
+  flex: 1 1 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4cqh;
+  align-content: center;
+  margin-top: 3cqh;
+}
+.pd-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.8cqh;
+  padding: 4.5cqh 3.6cqh;
+  border-radius: 5cqh;
+  background: var(--card);
+  border: 1px solid var(--card-line);
+}
+/* Biến thể của slide Target Audience: nội dung dồn xuống đáy thẻ. */
+.pd-card-bottom { justify-content: flex-end; min-height: 42cqh; }
+
+.pd-card-heading {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 3.2cqh;
+  line-height: 1.2;
+  color: rgb(var(--c-warm));
+  margin: 0;
+}
+.pd-card-body {
+  margin: 0;
+  font-size: 2.25cqh;
+  line-height: 1.5;
+  font-weight: 300;
+  color: var(--ink);
+}
+
+/* ======================================================= 05 · thẻ ngang 2×2 */
+.pd-row-grid {
+  flex: 1 1 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4cqh 5cqh;
+  align-content: center;
+  margin-top: 3cqh;
+}
+.pd-row {
+  display: flex;
+  align-items: center;
+  gap: 3cqh;
+  padding: 3.4cqh 4cqh;
+  border-radius: 999px;
+  background: var(--card);
+  border: 1px solid var(--card-line);
+}
+.pd-row .pd-card-heading { margin-bottom: 0.6cqh; }
+.pd-row .pd-card-body { max-width: 38ch; }
+
+/* ==================================================== 06 · sản phẩm + ảnh */
+.pd-product-body {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  gap: 6cqh;
+  margin-top: 2cqh;
+}
+.pd-product-left { flex: 1 1 48%; }
+.pd-product-body .pd-frame { flex: 1 1 52%; }
+
+/* ========================================================= 07 · biểu đồ */
+.pd-chart-body {
+  flex: 1 1 auto;
+  display: flex;
+  gap: 6cqh;
+  align-items: stretch;
+  margin-top: 1cqh;
+}
+.pd-plot { flex: 1 1 52%; margin: 0; display: flex; flex-direction: column; }
+/* Lưới 2 cột: [nhãn trục dọc] [vùng cột]. Hàng 2 là nhãn trục ngang, nằm
+   đúng cột với vùng cột nên nhãn luôn thẳng với cột. */
+.pd-plot-grid {
+  flex: 1 1 auto;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: 1fr auto;
+  gap: 0 2cqh;
+  min-height: 0;
+}
+.pd-ticks {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+  font-size: 2.2cqh;
+  font-weight: 300;
+  color: var(--ink);
+  /* không padding: vùng nhãn phải cao đúng bằng vùng cột để số thẳng vạch */
+  line-height: 1;
+}
+.pd-bars {
+  flex: 1 1 auto;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  gap: 3cqh;
+  align-items: end;
+  /* vạch kẻ ngang: 5 khoảng, khớp với 6 mốc của .pd-ticks */
+  background-image: repeating-linear-gradient(
+    to top,
+    rgb(var(--c-ink) / 0.28) 0 1px,
+    transparent 1px 20%
+  );
+  /* vạch đáy (mốc 0) và vạch đỉnh (mốc lớn nhất) — repeating không phủ 100% */
+  border-bottom: 1px solid rgb(var(--c-ink) / 0.28);
+  border-top: 1px solid rgb(var(--c-ink) / 0.28);
+  padding: 0 1cqh;
+}
+.pd-bar-slot { display: flex; align-items: flex-end; justify-content: center; height: 100%; }
+.pd-bar {
+  width: 62%;
+  min-height: 0.4cqh;
+  background: rgb(var(--c-accent));
+  animation: pd-grow 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+@keyframes pd-grow { from { height: 0 !important; } }
+.pd-bar-labels {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  gap: 3cqh;
+  padding: 1.4cqh 1cqh 0;
+  font-size: 2.6cqh;
+  font-weight: 300;
+  text-align: center;
+}
+.pd-chart-side {
+  flex: 1 1 48%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: right;
+}
+.pd-chart-side .pd-card-body { margin-bottom: 3.5cqh; }
+.pd-legend {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.4cqh 3cqh;
+  padding: 3.4cqh;
+  border-radius: 4cqh;
+  background: var(--card);
+  border: 1px solid var(--card-line);
+  text-align: left;
+}
+.pd-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 1.6cqh;
+  font-size: 2cqh;
+  font-weight: 300;
+  line-height: 1.35;
+}
+
+/* =========================================================== 08 · đội ngũ */
+.pd-team-grid {
+  flex: 1 1 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4cqh;
+  align-content: center;
+  margin-top: 3cqh;
+}
+.pd-member {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.4cqh;
+  padding: 4cqh 3cqh;
+  border-radius: 5cqh;
+  background: rgb(var(--c-panel));
+  border: 1px solid var(--card-line);
+}
+.pd-avatar {
+  width: 15cqh;
+  height: 15cqh;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+}
+.pd-avatar-empty {
+  background:
+    repeating-conic-gradient(
+      rgb(var(--c-ink) / 0.16) 0% 25%,
+      rgb(var(--c-ink) / 0.05) 0% 50%
+    ) 50% / 3cqh 3cqh;
+}
+.pd-member-role { margin: 0; font-size: 2.3cqh; font-weight: 300; }
+.pd-team-caption {
+  flex: 0 0 auto;
+  text-align: center;
+  font-size: 2.6cqh;
+  font-weight: 300;
+  margin: 4cqh 0 0;
+}
+
+/* ========================================================== 09 · lộ trình */
+.pd-roadmap .pd-track {
+  flex: 1 1 auto;
+  position: relative;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  margin-top: 2cqh;
+}
+.pd-track-line {
+  position: absolute;
+  left: 6%;
+  right: 6%;
+  top: 50%;
+  height: 1px;
+  background: rgb(var(--c-accent) / 0.55);
+}
+/* 3 hàng: [chữ phía trên] [orb — luôn ở giữa, trên đường kẻ] [chữ phía dưới] */
+.pd-stop {
+  position: relative;
+  display: grid;
+  grid-template-rows: 1fr auto 1fr;
+  justify-items: center;
+  align-items: center;
+  height: 100%;
+}
+.pd-stop .pd-orb { grid-row: 2; z-index: 1; }
+.pd-stop-arm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+}
+.pd-stop-up .pd-stop-arm { grid-row: 1; justify-content: flex-end; }
+/* Mốc chẵn: đảo thứ tự để cuống nối nằm sát orb, chữ ra ngoài. */
+.pd-stop-down .pd-stop-arm { grid-row: 3; flex-direction: column-reverse; justify-content: flex-end; }
+.pd-stop-tick {
+  width: 1px;
+  height: 5cqh;
+  flex: 0 0 auto;
+  background: rgb(var(--c-accent) / 0.55);
+}
+.pd-stop-text { width: 100%; max-width: 32cqh; text-align: center; }
+.pd-stop-text .pd-card-heading { margin-bottom: 0.8cqh; }
+
+/* ============================================================== 11 · kết */
+.pd-closing {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.pd-closing-title {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: 13cqh;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+.pd-closing-sub {
+  font-size: 2.4cqh;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgb(var(--c-accent-pale));
+  margin: 4cqh 0 0;
+}
+
+/* ---------------------------------------- nền cho các theme dùng bộ pitch
+   Quầng tím hai góc trên + quầng cam dưới-giữa, dựng lại từ ảnh nền gốc.
+   Màu lấy từ token nên theme "brand" và "pitch" tự ra đúng palette của mình. */
+.theme-pitch .bg,
+.theme-brand .bg {
+  background:
+    radial-gradient(58% 62% at 2% 4%,   rgb(var(--c-accent-deep) / 0.95), transparent 62%),
+    radial-gradient(46% 52% at 78% 6%,  rgb(var(--c-accent-deep) / 0.62), transparent 66%),
+    radial-gradient(40% 34% at 40% 100%, rgb(var(--c-warm) / 0.55), transparent 68%),
+    radial-gradient(30% 26% at 88% 96%, rgb(var(--c-accent-deep) / 0.42), transparent 70%),
+    var(--page-bg);
+}
+
+/* ------------------------------------------ tinh chỉnh riêng cho font Clash
+   Clash Display có chữ đặc và khoảng chữ hẹp hơn Be Vietnam Pro, nên phần
+   letter-spacing âm dùng cho theme "pitch" sẽ làm chữ dính. Theme "brand"
+   dùng Clash → trả khoảng chữ về 0 và giãn nhẹ ở cỡ nhỏ. */
+.theme-brand .pd-title,
+.theme-brand .pd-title-stack { letter-spacing: 0; }
+.theme-brand .pd-cover-title { letter-spacing: -0.005em; }
+.theme-brand .pd-closing-title { letter-spacing: 0; }
+.theme-brand .pd-card-heading,
+.theme-brand .pd-accent-heading { letter-spacing: 0.015em; }
+.theme-brand .pd-bignum,
+.theme-brand .pd-orb { letter-spacing: 0.01em; }
+
+/* ------------------------------------------------------- slide tràn viền
+   Trang bìa chiếm TRỌN màn hình: bỏ khung 16:9 và bỏ lề, nên không còn thấy
+   nền (.bg) phía sau. Danh sách kind áp dụng: FULL_BLEED_KINDS trong Deck.tsx. */
+.stage-pitch.stage-bleed { padding: 0; }
+.stage-pitch.stage-bleed .pd-stage {
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  aspect-ratio: auto;
+}

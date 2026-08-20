@@ -1,0 +1,28 @@
+# --- Node / Next.js ---
+/node_modules
+/.next
+/out
+/build
+*.tsbuildinfo
+next-env.d.ts
+
+# --- Môi trường & bí mật ---
+.env
+.env.*
+!.env.example
+
+# --- Hệ điều hành / editor ---
+.DS_Store
+Thumbs.db
+.idea
+.vscode
+
+# --- Deploy ---
+.vercel
+
+# --- Tài liệu nguồn nội bộ: KHÔNG đưa lên repo ---
+# Brand guideline, file pptx gốc, ảnh chụp tham chiếu… là tài liệu nội bộ.
+/material
+/Material
+*.pptx
+*.zip

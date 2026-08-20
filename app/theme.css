@@ -1,0 +1,386 @@
+/* ==========================================================================
+   THEME  —  ĐỔI GIAO DIỆN CHỈ CẦN SỬA FILE NÀY
+   --------------------------------------------------------------------------
+   Toàn bộ màu sắc & font của bộ slide nằm ở đây. globals.css / pitch.css chỉ
+   mô tả BỐ CỤC, không chứa màu cứng. Muốn theme mới: copy một block
+   ".theme-*", đổi giá trị, rồi đổi ACTIVE_THEME trong lib/theme.ts.
+
+   Màu gốc viết dạng KÊNH RGB ("170 97 255") thay vì hex, để dùng được với
+   mọi độ trong suốt:  rgb(var(--c-accent) / 0.3)
+   ========================================================================== */
+
+/* ==========================================================================
+   FONT
+   Be Vietnam Pro  = tiêu đề (thay Poppins của bản pptx/Canva — Poppins KHÔNG
+                     có subset vietnamese, thiếu dải U+1EA0-1EF1 nên chữ có
+                     dấu bị nhảy sang font khác giữa từ).
+   Montserrat      = nội dung (có subset vietnamese).
+   ========================================================================== */
+@font-face {
+  font-family: "Be Vietnam Pro";
+  src: url("/fonts/BeVietnamPro-300-latin.woff2") format("woff2");
+  font-weight: 300; font-style: normal; font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Be Vietnam Pro";
+  src: url("/fonts/BeVietnamPro-300-latin-ext.woff2") format("woff2");
+  font-weight: 300; font-style: normal; font-display: swap;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Be Vietnam Pro";
+  src: url("/fonts/BeVietnamPro-300-vietnamese.woff2") format("woff2");
+  font-weight: 300; font-style: normal; font-display: swap;
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01B1, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: "Be Vietnam Pro";
+  src: url("/fonts/BeVietnamPro-400-latin.woff2") format("woff2");
+  font-weight: 400; font-style: normal; font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Be Vietnam Pro";
+  src: url("/fonts/BeVietnamPro-400-latin-ext.woff2") format("woff2");
+  font-weight: 400; font-style: normal; font-display: swap;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Be Vietnam Pro";
+  src: url("/fonts/BeVietnamPro-400-vietnamese.woff2") format("woff2");
+  font-weight: 400; font-style: normal; font-display: swap;
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01B1, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: "Be Vietnam Pro";
+  src: url("/fonts/BeVietnamPro-500-latin.woff2") format("woff2");
+  font-weight: 500; font-style: normal; font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Be Vietnam Pro";
+  src: url("/fonts/BeVietnamPro-500-latin-ext.woff2") format("woff2");
+  font-weight: 500; font-style: normal; font-display: swap;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Be Vietnam Pro";
+  src: url("/fonts/BeVietnamPro-500-vietnamese.woff2") format("woff2");
+  font-weight: 500; font-style: normal; font-display: swap;
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01B1, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: "Be Vietnam Pro";
+  src: url("/fonts/BeVietnamPro-600-latin.woff2") format("woff2");
+  font-weight: 600; font-style: normal; font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Be Vietnam Pro";
+  src: url("/fonts/BeVietnamPro-600-latin-ext.woff2") format("woff2");
+  font-weight: 600; font-style: normal; font-display: swap;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Be Vietnam Pro";
+  src: url("/fonts/BeVietnamPro-600-vietnamese.woff2") format("woff2");
+  font-weight: 600; font-style: normal; font-display: swap;
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01B1, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: "Be Vietnam Pro";
+  src: url("/fonts/BeVietnamPro-700-latin.woff2") format("woff2");
+  font-weight: 700; font-style: normal; font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Be Vietnam Pro";
+  src: url("/fonts/BeVietnamPro-700-latin-ext.woff2") format("woff2");
+  font-weight: 700; font-style: normal; font-display: swap;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Be Vietnam Pro";
+  src: url("/fonts/BeVietnamPro-700-vietnamese.woff2") format("woff2");
+  font-weight: 700; font-style: normal; font-display: swap;
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01B1, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: "Montserrat";
+  src: url("/fonts/Montserrat-300-latin.woff2") format("woff2");
+  font-weight: 300; font-style: normal; font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Montserrat";
+  src: url("/fonts/Montserrat-300-latin-ext.woff2") format("woff2");
+  font-weight: 300; font-style: normal; font-display: swap;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Montserrat";
+  src: url("/fonts/Montserrat-300-vietnamese.woff2") format("woff2");
+  font-weight: 300; font-style: normal; font-display: swap;
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01B1, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: "Montserrat";
+  src: url("/fonts/Montserrat-400-latin.woff2") format("woff2");
+  font-weight: 400; font-style: normal; font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Montserrat";
+  src: url("/fonts/Montserrat-400-latin-ext.woff2") format("woff2");
+  font-weight: 400; font-style: normal; font-display: swap;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Montserrat";
+  src: url("/fonts/Montserrat-400-vietnamese.woff2") format("woff2");
+  font-weight: 400; font-style: normal; font-display: swap;
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01B1, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: "Montserrat";
+  src: url("/fonts/Montserrat-500-latin.woff2") format("woff2");
+  font-weight: 500; font-style: normal; font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Montserrat";
+  src: url("/fonts/Montserrat-500-latin-ext.woff2") format("woff2");
+  font-weight: 500; font-style: normal; font-display: swap;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Montserrat";
+  src: url("/fonts/Montserrat-500-vietnamese.woff2") format("woff2");
+  font-weight: 500; font-style: normal; font-display: swap;
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01B1, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: "Montserrat";
+  src: url("/fonts/Montserrat-600-latin.woff2") format("woff2");
+  font-weight: 600; font-style: normal; font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Montserrat";
+  src: url("/fonts/Montserrat-600-latin-ext.woff2") format("woff2");
+  font-weight: 600; font-style: normal; font-display: swap;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Montserrat";
+  src: url("/fonts/Montserrat-600-vietnamese.woff2") format("woff2");
+  font-weight: 600; font-style: normal; font-display: swap;
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01B1, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: "Montserrat";
+  src: url("/fonts/Montserrat-700-latin.woff2") format("woff2");
+  font-weight: 700; font-style: normal; font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Montserrat";
+  src: url("/fonts/Montserrat-700-latin-ext.woff2") format("woff2");
+  font-weight: 700; font-style: normal; font-display: swap;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Montserrat";
+  src: url("/fonts/Montserrat-700-vietnamese.woff2") format("woff2");
+  font-weight: 700; font-style: normal; font-display: swap;
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01B1, U+1EA0-1EF9, U+20AB;
+}
+
+:root {
+  --font: "Montserrat", ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, sans-serif;
+  --font-display: "Be Vietnam Pro", "Montserrat", ui-sans-serif, system-ui, sans-serif;
+
+  --radius: 22px;
+  --maxw: 1180px;
+}
+
+/* ==========================================================================
+   THEME "apero"  —  nền tối, accent tím Apero, điểm nhấn cam
+   ========================================================================== */
+.theme-apero {
+  /* ----- Màu gốc (kênh RGB) ----- */
+  --c-accent:       124 58 237;   /* tím Apero — accent chính */
+  --c-accent-lit:   159 112 252;  /* tím sáng */
+  --c-accent-pale:  196 181 253;  /* tím nhạt — chữ nhấn trên nền tối */
+  --c-accent-deep:   91 33 182;   /* tím đậm đặc — card */
+  --c-grad-a:       109 40 217;   /* gradient đầu */
+  --c-grad-b:       157 78 221;   /* gradient cuối */
+  --c-warm:         232 102 26;   /* cam — quầng sáng + nhấn hiếm */
+  --c-warm-lit:     249 115 22;
+  --c-success:       74 222 128;
+  --c-success-deep:  16 160 90;
+  --c-ink:          255 255 255;  /* chữ chính */
+  --c-page:           8 4 15;     /* nền trang */
+  --c-page-2:         5 2 10;
+  --c-panel:         16 10 28;    /* khối tối phụ */
+  --c-shadow:         0 0 0;      /* bóng đổ */
+  --c-shadow-cool:   11 19 28;    /* bóng đổ trên nền sáng */
+
+  /* ----- Nền & chữ ----- */
+  --page-bg:   rgb(var(--c-page));
+  --page-bg-2: rgb(var(--c-page-2));
+  --ink:       rgb(var(--c-ink));
+  --ink-dim:   #c7c1d4;
+  --ink-faint: #7c7488;
+  --line:      rgb(var(--c-ink) / 0.14);
+  --card:      rgb(var(--c-ink) / 0.05);
+  --card-line: rgb(var(--c-ink) / 0.14);
+
+  /* ----- Bề mặt SÁNG (popup hướng dẫn chi tiết) ----- */
+  --surface-lite:      #f7f7fb;
+  --surface-lite-2:    #f3f4f8;
+  --surface-lite-3:    #e9eaf0;
+  --ink-on-lite:       #0b131c;
+  --ink-on-lite-dim:   #5b6677;
+  --ink-on-lite-soft:  #28303c;
+
+  /* ----- Alias tương thích (tên cũ dùng trong globals.css) ----- */
+  --blue:         rgb(var(--c-accent));
+  --violet:       rgb(var(--c-accent-lit));
+  --violet-deep:  rgb(var(--c-accent-pale));
+  --purple-solid: rgb(var(--c-accent-deep));
+  --purple-grad-a:rgb(var(--c-grad-a));
+  --purple-grad-b:rgb(var(--c-grad-b));
+  --amber:        rgb(var(--c-warm));
+  --navy:         rgb(var(--c-panel));
+  --lime:         #dbfe52;
+  --grey:         #8a8296;
+}
+
+/* ==========================================================================
+   THEME "pitch"  —  Startup Pitch Deck Apero
+   Màu ĐO TRỰC TIẾP từ bản gốc (Material/Present Apero.pptx + trang Canva):
+     nền tối nhất #04001F · quầng tím góc #48188F · card #261B3F
+     tím nhấn #AA61FF · tím sáng #C787FF · tím rất nhạt #FADBFF
+     cam đất #E08245 · xám nhạt #F4F4F4
+   ========================================================================== */
+.theme-pitch {
+  --c-accent:       170  97 255;   /* #AA61FF — tím nhấn (tiêu đề dòng 2, số) */
+  --c-accent-lit:   199 135 255;   /* #C787FF — tím sáng */
+  --c-accent-pale:  250 219 255;   /* #FADBFF — tím rất nhạt */
+  --c-accent-deep:   72  24 143;   /* #48188F — tím quầng sáng góc */
+  --c-grad-a:       124  45 232;
+  --c-grad-b:       199 135 255;
+  --c-warm:         224 130  69;   /* #E08245 — cam đất, màu nhấn tiêu đề card */
+  --c-warm-lit:     240 160 100;
+  --c-success:       74 222 128;
+  --c-success-deep:  16 160  90;
+  --c-ink:          255 255 255;
+  --c-page:           4   0  31;   /* #04001F — nền tối nhất */
+  --c-page-2:         2   0  12;
+  --c-panel:         38  27  63;   /* #261B3F — nền card */
+  --c-shadow:         0   0   0;
+  --c-shadow-cool:   38  27  63;
+
+  --page-bg:   rgb(var(--c-page));
+  --page-bg-2: rgb(var(--c-page-2));
+  --ink:       rgb(var(--c-ink));
+  --ink-dim:   #d6cce6;
+  --ink-faint: #9186a8;
+  --line:      rgb(var(--c-ink) / 0.14);
+  --card:      rgb(var(--c-panel) / 0.72);
+  --card-line: rgb(var(--c-accent) / 0.34);
+
+  --surface-lite:     #f4f4f4;
+  --surface-lite-2:   #ececec;
+  --surface-lite-3:   #e0e0e0;
+  --ink-on-lite:      #261b3f;
+  --ink-on-lite-dim:  #6b5f80;
+  --ink-on-lite-soft: #3a2d56;
+
+  --blue:          rgb(var(--c-accent));
+  --violet:        rgb(var(--c-accent-lit));
+  --violet-deep:   rgb(var(--c-accent-pale));
+  --purple-solid:  rgb(var(--c-accent-deep));
+  --purple-grad-a: rgb(var(--c-grad-a));
+  --purple-grad-b: rgb(var(--c-grad-b));
+  --amber:         rgb(var(--c-warm));
+  --navy:          rgb(var(--c-panel));
+  --lime:          #dbfe52;
+  --grey:          #9186a8;
+}
+
+/* ==========================================================================
+   THEME "brand"  —  ĐÚNG Apero Brand Guideline 4.0
+   Nguồn: "Apero Brand Guideline 4.0" (bản cập nhật 21/06/2026).
+   MỌI giá trị dưới đây lấy từ guideline (đo pixel trên chính file PDF), không
+   có màu tự đặt.
+
+     Primary   Medium Purple   #4E018F
+     Secondary Apero Orange    #F07D33   Tech Cyan      #27C4FF
+               Soft Lavender   #CBA3FF   Magenta Pink   #D6007A
+               Dark Midnight   #0F1125   White          #FFFFFF
+     Tints     10% #6522A1 · 20% #7C3CB2 · 40% #A677CF · 60% #C7A2E4 · 80% #E7D3F4
+     Shades    20% #3D0070 · 40% #2E0054 · 60% #1E0038 · 80% #0F001C
+     Tones     20% #562574 · 40% #593E6B · 60% #645673 · 80% #726C81
+     Gradient  Energy power       #4E018F → #F07D33
+               Digital/futuristic #4E018F → #27C4FF
+               Modern/creative    #4E018F → #CBA3FF
+     Font      Tiêu đề Clash (SVN-Clash) · Nội dung Montserrat
+   ========================================================================== */
+.theme-brand {
+  /* font theo guideline: Clash cho tiêu đề (đã kiểm tra: đủ 69/69 dấu tiếng Việt) */
+  --font-display: "Clash Display", "Be Vietnam Pro", "Montserrat", ui-sans-serif, sans-serif;
+
+  /* ----- Màu gốc (kênh RGB) ----- */
+  --c-accent:       166 119 207;   /* Tint 40% #A677CF — chữ nhấn, cột, viền */
+  --c-accent-lit:   199 162 228;   /* Tint 60% #C7A2E4 */
+  --c-accent-pale:  203 163 255;   /* Soft Lavender #CBA3FF */
+  --c-accent-deep:   78   1 143;   /* PRIMARY Medium Purple #4E018F */
+  --c-grad-a:        78   1 143;   /* gradient "Energy power" — đầu */
+  --c-grad-b:       240 125  51;   /* gradient "Energy power" — cuối */
+  --c-warm:         240 125  51;   /* Apero Orange #F07D33 */
+  --c-warm-lit:     245 160 107;   /* Apero Orange sáng hơn (tint) */
+  --c-cyan:          39 196 255;   /* Tech Cyan #27C4FF */
+  --c-magenta:      214   0 122;   /* Magenta Pink #D6007A */
+  --c-success:       39 196 255;   /* guideline không có xanh lá → dùng Tech Cyan */
+  --c-success-deep:  20 140 190;
+  --c-ink:          255 255 255;   /* Pure White #FFFFFF */
+  --c-page:          15  17  37;   /* Dark Midnight #0F1125 */
+  --c-page-2:        15   0  28;   /* Shade 80% #0F001C */
+  --c-panel:         46   0  84;   /* Shade 40% #2E0054 — nền thẻ */
+  --c-shadow:         0   0   0;
+  --c-shadow-cool:   15  17  37;
+
+  /* ----- Nền & chữ ----- */
+  --page-bg:   rgb(var(--c-page));
+  --page-bg-2: rgb(var(--c-page-2));
+  --ink:       rgb(var(--c-ink));
+  --ink-dim:   #e7d3f4;            /* Tint 80% */
+  --ink-faint: #645673;            /* Tone 60% */
+  --line:      rgb(var(--c-ink) / 0.14);
+  --card:      rgb(var(--c-panel) / 0.55);
+  --card-line: rgb(var(--c-accent) / 0.38);
+
+  /* ----- Bề mặt sáng (popup hướng dẫn) ----- */
+  --surface-lite:     #ffffff;
+  --surface-lite-2:   #f4f1f8;
+  --surface-lite-3:   #e7d3f4;     /* Tint 80% */
+  --ink-on-lite:      #0f001c;     /* Shade 80% */
+  --ink-on-lite-dim:  #645673;     /* Tone 60% */
+  --ink-on-lite-soft: #2e0054;     /* Shade 40% */
+
+  /* ----- Alias tương thích ----- */
+  --blue:          rgb(var(--c-accent));
+  --violet:        rgb(var(--c-accent-lit));
+  --violet-deep:   rgb(var(--c-accent-pale));
+  --purple-solid:  rgb(var(--c-accent-deep));
+  --purple-grad-a: rgb(var(--c-grad-a));
+  --purple-grad-b: rgb(var(--c-grad-b));
+  --amber:         rgb(var(--c-warm));
+  --navy:          rgb(var(--c-panel));
+  --lime:          rgb(var(--c-cyan));
+  --grey:          #726c81;        /* Tone 80% */
+}

@@ -1,0 +1,34 @@
+{
+  "name": "apero-slide-template",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Bộ slide thuyết trình chạy trên web (Next.js + React) theo Apero Brand Guideline 4.0. Clone về, sửa nội dung trong lib/, là có bộ slide của bạn.",
+  "license": "MIT",
+  "keywords": [
+    "presentation",
+    "slides",
+    "deck",
+    "nextjs",
+    "react",
+    "apero",
+    "pitch-deck"
+  ],
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "next": "^16.2.9",
+    "react": "19.1.0",
+    "react-dom": "19.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "typescript": "^5"
+  }
+}
