@@ -938,10 +938,14 @@
   margin-top: 1cqh;
 }
 /* Vòng quỹ đạo: SVG 3 cung + mũi tên chỉ chiều chu trình.
-   `color` điều khiển màu mũi tên qua `fill: currentColor` trong marker. */
+   `color` điều khiển màu mũi tên qua `fill: currentColor` trong marker.
+
+   Kích thước vòng phải chừa chỗ cho 3 thẻ quanh nó. Bản trước vòng 52cqh
+   trong vùng cao ~71cqh nên thẻ trên ĐÈ lên vòng (hở 0px) và còn tràn khỏi
+   khung, còn hai thẻ dưới lại hở 100px — chênh lệch làm sơ đồ mất cân. */
 .pd-ring {
-  width: 52cqh;
-  height: 52cqh;
+  width: 32cqh;
+  height: 32cqh;
   overflow: visible;
   color: rgb(var(--c-accent-pale));
 }
@@ -951,16 +955,15 @@
   stroke-width: 1.6;
   stroke-linecap: round;
 }
-/* Chữ giữa vòng. Vòng rộng 52cqh nên ở giữa cho phép tới ~40cqh; bó ở 22cqh
-   như trước làm chữ vỡ 4 dòng và dòng cuối mồ côi một từ. Nới lên 31cqh (vẫn
-   còn lề rõ tới cung) + text-wrap: balance để các dòng dài đều nhau. */
+/* Chữ giữa vòng. Bề rộng phải theo bán kính vòng: vòng 32cqh (bán kính 16cqh)
+   nên bó chữ ở 20cqh để dòng dài nhất còn cách cung một khoảng thấy được. */
 .pd-loop-center {
   position: absolute;
-  max-width: 31cqh;
+  max-width: 20cqh;
   text-align: center;
-  font-size: 2.3cqh;
+  font-size: 2cqh;
   font-weight: 500;
-  line-height: 1.45;
+  line-height: 1.4;
   color: var(--ink-dim);
   text-wrap: balance;
 }
@@ -973,12 +976,16 @@
   border-radius: 999px;
   background: rgb(var(--c-panel));
   border: 1px solid var(--card-line);
-  max-width: 42cqh;
+  max-width: 38cqh;
 }
-/* 3 mắt xích: trên, phải-dưới, trái-dưới */
-.pd-loop-n1 { top: 0; left: 50%; transform: translate(-50%, -12%); }
-.pd-loop-n2 { bottom: 4cqh; right: 6cqh; }
-.pd-loop-n3 { bottom: 4cqh; left: 6cqh; }
+/* Ba thẻ quanh vòng: một ở trên giữa, hai ở dưới hai bên (bố cục tam giác —
+   khung 16:9 quá rộng để xếp ba thẻ viên thuốc trên một vòng tròn đều bán kính).
+   Cái mắt thấy là KHOẢNG HỞ tới vòng, không phải khoảng cách tâm. Ba con số
+   dưới đây tìm bằng cách quét tham số và đo hở từ mép vòng tới từng thẻ:
+   hở 40 / 47 / 47 px, chênh 7px (bản trước: 0 / 100 / 100 — thẻ trên đè vòng). */
+.pd-loop-n1 { top: 0; left: 50%; transform: translateX(-50%); }
+.pd-loop-n2 { bottom: 4cqh; right: 31cqh; }
+.pd-loop-n3 { bottom: 4cqh; left: 31cqh; }
 .pd-loop-name {
   font-family: var(--font-display);
   font-weight: 700;
