@@ -137,24 +137,23 @@
 .pd-orb-md { width: 7cqh;    height: 7cqh;    font-size: 2.6cqh; }
 .pd-orb-lg { width: 9.6cqh;  height: 9.6cqh;  font-size: 3.4cqh; }
 
-/* ============================================================ 01 · bìa */
-.pd-cover { flex-direction: row; align-items: stretch; gap: 0; padding: 0; }
-/* Bìa có nền riêng: gradient tím sáng, không dùng nền tối của slide nội dung. */
-.pd-cover::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(78% 96% at 6% 44%, rgb(var(--c-accent-deep) / 0.95), transparent 72%),
-    linear-gradient(112deg,
-      rgb(var(--c-accent-deep)) 0%,
-      rgb(var(--c-accent-deep) / 0.72) 38%,
-      rgb(var(--c-page) / 0.9) 68%,
-      rgb(var(--c-page)) 100%);
+/* ============================================================ 01 · bìa
+   Nền là ẢNH GỐC cả slide (`Material/Trang 1.png` → bg-cover.jpg): nửa trái tím
+   trơn để đặt chữ, nửa phải là khối kính xếp quạt. Vì ảnh đã có sẵn phần trống
+   bên trái nên KHÔNG cần thẻ ảnh hero riêng, và không cần gradient CSS nữa. */
+.pd-cover {
+  flex-direction: row;
+  align-items: stretch;
+  gap: 0;
+  padding: 0;
+  background-image: url("/pitch/bg-cover.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 .pd-cover-left {
   position: relative;
-  flex: 1 1 54%;
+  flex: 0 0 52%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -189,22 +188,6 @@
   background: rgb(var(--c-accent) / 0.12);
   color: rgb(var(--c-accent-pale));
 }
-/* Ảnh hero tràn hết cạnh phải, cạnh trên và cạnh dưới (full-bleed). */
-.pd-cover-right {
-  position: relative;
-  flex: 1 1 46%;
-  overflow: hidden;
-}
-.pd-cover-hero {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: right center;
-  display: block;
-}
-
 /* ================================================ 02 · tiêu đề + danh sách
    Nền là ẢNH GỐC của bản mẫu (`/pitch/bg-arc.jpg`, lấy từ Present Apero.pptx):
    nửa trái tím, nửa phải đen, giữa hai nửa là vòng cung phát sáng.
@@ -604,14 +587,17 @@
 /* ---------------------------------------- nền cho các theme dùng bộ pitch
    Quầng tím hai góc trên + quầng cam dưới-giữa, dựng lại từ ảnh nền gốc.
    Màu lấy từ token nên theme "brand" và "pitch" tự ra đúng palette của mình. */
+/* Nền dùng chung cho các slide từ 3 trở đi — ẢNH GỐC
+   (`Material/Trang mau.png` → bg-content.jpg): đen ở giữa, quầng tím hai góc
+   trên, quầng cam dưới-giữa. Trang 1 và 2 có nền riêng đè lên nên không ảnh
+   hưởng. Trước đây phần này dựng bằng 4 lớp radial-gradient — bỏ để khớp mẫu. */
 .theme-pitch .bg,
 .theme-brand .bg {
-  background:
-    radial-gradient(58% 62% at 2% 4%,   rgb(var(--c-accent-deep) / 0.95), transparent 62%),
-    radial-gradient(46% 52% at 78% 6%,  rgb(var(--c-accent-deep) / 0.62), transparent 66%),
-    radial-gradient(40% 34% at 40% 100%, rgb(var(--c-warm) / 0.55), transparent 68%),
-    radial-gradient(30% 26% at 88% 96%, rgb(var(--c-accent-deep) / 0.42), transparent 70%),
-    var(--page-bg);
+  background-image: url("/pitch/bg-content.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: var(--page-bg);
 }
 
 /* ------------------------------------------ tinh chỉnh riêng cho font Clash

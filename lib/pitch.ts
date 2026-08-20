@@ -16,7 +16,8 @@ import { t, type Lang } from "./deck";
 // --- Ảnh: đường dẫn trong /public. placeholder = khung ảnh tạm có mô tả. ---
 type Img = { image?: string; placeholder?: string };
 
-/** Trang bìa: logo + tiêu đề lớn + ảnh hero bên phải. */
+/** Trang bìa: logo + tiêu đề lớn. Nền là ảnh cả slide, khai báo ở
+ *  .pd-cover trong pitch.css — không cần trường ảnh riêng. */
 export interface PitchCover extends Img {
   kind: "cover";
   title: string;
@@ -139,7 +140,6 @@ export const pitchDeck: PitchSlide[] = [
       "Apero Technologies Group — tech products for billions of users.",
     ),
     chips: ["Creations for Billions", "Build global, from Vietnam"],
-    image: "/pitch/hero-glass.jpg",
   },
 
   // ------------------------------------------------- 02 vì sao chọn Apero

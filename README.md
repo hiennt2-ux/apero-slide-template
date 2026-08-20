@@ -82,7 +82,7 @@ placeholder: "Ảnh sản phẩm, chụp ngang", // khung tạm, hiện mô tả
 
 | `kind` | Layout |
 |---|---|
-| `cover` | Logo + tiêu đề lớn + ảnh tràn cạnh phải |
+| `cover` | Logo + tiêu đề lớn, nền là ảnh cả slide |
 | `numbers` | Tiêu đề 2 dòng + danh sách đánh số, nền vòng cung phát sáng |
 | `story` | Tiêu đề 2 dòng + đoạn văn + ảnh dọc trong khung |
 | `cards` | 3 thẻ dọc, mỗi thẻ có quả cầu số |
@@ -152,6 +152,22 @@ Có dòng `/* vietnamese */` thì mới dùng được cho tiếng Việt.
 
 ---
 
+## Ba ảnh nền
+
+Ba slide có nền riêng là **ảnh**, không phải gradient CSS — nên khớp đúng bản thiết kế gốc:
+
+| Slide | Ảnh | Khai báo ở |
+|---|---|---|
+| 1 (bìa) | `bg-cover.jpg` — nửa trái tím trơn để đặt chữ, nửa phải khối kính | `.pd-cover` |
+| 2 (`numbers`) | `bg-arc.jpg` — vòng cung phát sáng | `.pd-numbers` |
+| 3 trở đi | `bg-content.jpg` — nền dùng chung, quầng tím trên + cam dưới | `.theme-*  .bg` |
+
+⚠️ Ba ảnh này **màu cố định**, không đổi theo theme. Đổi `ACTIVE_THEME` thì nền giữ nguyên,
+chỉ chữ và số đổi màu. Đây là đánh đổi có ý thức: khớp bản mẫu 100% thay vì vẽ bằng token màu.
+
+Thay ảnh của bạn: ghi đè file trong `public/pitch/` (giữ nguyên tên), hoặc sửa đường dẫn trong
+`app/pitch.css`.
+
 ## Slide tràn màn hình
 
 Trang bìa và trang `numbers` chiếm **trọn màn hình**, không có lề. Các trang còn lại nằm trong
@@ -203,8 +219,8 @@ Mã nguồn: MIT — xem [LICENSE](LICENSE).
 
 | File | Giấy phép |
 |---|---|
-| `apero-logo.png`, `bg-cover.png`, `bg-content.png`, `bg-arc.jpg`, `motif-orbs.png` | Tài sản thương hiệu Apero Technologies Group — **không** thuộc MIT. Dùng cho tổ chức khác thì thay bằng asset của bạn. |
-| `hero-glass.jpg`, `img-chip.jpg`, `img-portrait.jpg` | Đồ hoạ trừu tượng sinh từ SVG theo bảng màu brand — **thuộc MIT**, dùng/sửa/thay tự do. |
+| `apero-logo.png`, `bg-cover.jpg`, `bg-arc.jpg`, `bg-content.jpg`, `motif-orbs.png` | Tài sản thương hiệu Apero Technologies Group — **không** thuộc MIT. Dùng cho tổ chức khác thì thay bằng asset của bạn. |
+| `img-chip.jpg`, `img-portrait.jpg` | Đồ hoạ trừu tượng sinh từ SVG theo bảng màu brand — **thuộc MIT**, dùng/sửa/thay tự do. |
 
 Font đi kèm giữ giấy phép gốc: Clash Display (ITF Free Font License), Montserrat và
 Be Vietnam Pro (SIL Open Font License 1.1).

@@ -28,17 +28,16 @@ The MIT license above covers the SOURCE CODE only. It does NOT cover:
 
   * The Apero logo and wordmark (public/pitch/apero-logo.png)
   * The brand backgrounds and graphic motif taken from Apero's own design
-    files: public/pitch/bg-cover.png, bg-content.png, bg-arc.jpg, motif-orbs.png
+    files: public/pitch/bg-cover.jpg, bg-arc.jpg, bg-content.jpg, motif-orbs.png
   * The Apero name, the "Creations for Billions" tagline, and the brand colour
     system
 
 Those remain the property of Apero Technologies Group. If you reuse this
 template for another organisation, replace them with your own assets.
 
-The three illustration images -- public/pitch/hero-glass.jpg, img-chip.jpg and
-img-portrait.jpg -- are abstract graphics generated from SVG source using the
-brand palette. They ARE covered by the MIT license above, so you may keep,
-modify or replace them freely.
+The two illustration images -- public/pitch/img-chip.jpg and img-portrait.jpg --
+are abstract graphics generated from SVG source using the brand palette. They ARE
+covered by the MIT license above, so you may keep, modify or replace them freely.
 
 BUNDLED FONTS keep their original licenses:
 

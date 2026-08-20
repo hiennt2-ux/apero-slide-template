@@ -67,16 +67,6 @@ export default function PitchSlide({ slide, lang }: { slide: P; lang: Lang }) {
               </div>
             )}
           </div>
-          <div className="pd-cover-right" aria-hidden>
-            {slide.image ? (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img className="pd-cover-hero" src={slide.image} alt="" />
-            ) : (
-              <div className="pd-cover-hero pd-frame-empty">
-                <span>{slide.placeholder ?? ui(lang).imageComingSoon}</span>
-              </div>
-            )}
-          </div>
         </section>
       );
 
