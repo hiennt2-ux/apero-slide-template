@@ -623,3 +623,330 @@
   max-width: none;
   aspect-ratio: auto;
 }
+
+/* ==========================================================================
+   LAYOUT THÊM — báo cáo, review, all-hands
+   Vẫn theo nguyên tắc của file này: chỉ bố cục, mọi màu qua token theme.
+   ========================================================================== */
+
+.pd-kicker {
+  font-size: 2cqh;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgb(var(--c-accent-pale));
+  margin: 0 0 2.5cqh;
+}
+/* Footnote: dùng --ink-dim chứ KHÔNG dùng --ink-faint. Chữ mờ đọc được trên
+   màn hình nhưng biến mất khi chiếu máy chiếu trong phòng sáng. */
+.pd-footnote {
+  flex: 0 0 auto;
+  margin: 3cqh 0 0;
+  font-size: 2cqh;
+  font-weight: 300;
+  line-height: 1.45;
+  color: var(--ink-dim);
+}
+
+/* ------------------------------------------------------ câu lớn / transition */
+.pd-statement { align-items: center; justify-content: center; }
+.pd-statement > .pd-motif { position: absolute; right: 6cqh; top: 6cqh; }
+.pd-statement-body { max-width: 82ch; text-align: center; }
+.pd-statement-title {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: 7.6cqh;
+  line-height: 1.16;
+  margin: 0;
+}
+.pd-statement-sub {
+  font-size: 2.6cqh;
+  font-weight: 300;
+  line-height: 1.5;
+  color: var(--ink-dim);
+  margin: 3.5cqh 0 0;
+}
+/* Slide transition: nền tối trơn, chỉ còn một câu. */
+.pd-statement-bare { background: rgb(var(--c-page-2)); }
+.pd-statement-bare .pd-statement-title { font-size: 8.4cqh; }
+
+/* ------------------------------------------------------------ số rất lớn */
+.pd-figures {
+  flex: 1 1 auto;
+  display: grid;
+  gap: 5cqh;
+  align-content: center;
+  margin-top: 2cqh;
+}
+.pd-figures-1 { grid-template-columns: 1fr; justify-items: center; text-align: center; }
+.pd-figures-2 { grid-template-columns: repeat(2, 1fr); }
+.pd-figures-3 { grid-template-columns: repeat(3, 1fr); }
+/* 3 hàng [số | nhãn | ghi chú] dùng `subgrid`: các cột chia CHUNG hàng, nên số
+   dài xuống 2 dòng cũng không làm nhãn cột khác lệch. */
+.pd-figures-2, .pd-figures-3 { grid-template-rows: auto auto auto; align-content: center; }
+.pd-figure {
+  display: grid;
+  grid-template-rows: subgrid;
+  grid-row: span 3;
+  align-content: start;
+  row-gap: 1.4cqh;
+}
+/* Trình duyệt không hỗ trợ subgrid: quay về grid thường, chỉ lệch nhẹ. */
+@supports not (grid-template-rows: subgrid) {
+  .pd-figure { grid-template-rows: auto auto auto; grid-row: auto; }
+}
+.pd-figures-1 .pd-figure { grid-row: auto; grid-template-rows: auto auto auto; justify-items: center; }
+.pd-figure-value {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 13cqh;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  background: linear-gradient(150deg, rgb(var(--c-ink)) 0%, rgb(var(--c-accent-pale)) 55%, rgb(var(--c-warm)) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.pd-figures-1 .pd-figure-value { font-size: 20cqh; }
+.pd-figures-3 .pd-figure-value { font-size: 9.4cqh; }
+.pd-figure-label {
+  font-size: 2.7cqh;
+  font-weight: 500;
+  line-height: 1.35;
+  color: var(--ink);
+}
+.pd-figure-note {
+  font-size: 2.1cqh;
+  font-weight: 300;
+  line-height: 1.4;
+  color: var(--ink-dim);
+}
+
+/* ------------------------------------------------------- lưới 4 khối số */
+.pd-stat-grid {
+  flex: 1 1 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 3cqh;
+  align-content: center;
+  margin-top: 3cqh;
+}
+.pd-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2cqh;
+  padding: 4cqh 3cqh;
+  border-radius: 4cqh;
+  background: var(--card);
+  border: 1px solid var(--card-line);
+}
+.pd-stat-value {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 7.6cqh;
+  line-height: 1;
+  color: rgb(var(--c-warm));
+}
+.pd-stat-label { font-size: 2.2cqh; font-weight: 300; line-height: 1.4; }
+
+/* ---------------------------------------------------------------- bảng */
+.pd-table-wrap { flex: 1 1 auto; display: flex; align-items: center; overflow-x: auto; }
+.pd-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 2.3cqh;
+  font-weight: 300;
+}
+.pd-table th {
+  text-align: left;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 2.4cqh;
+  color: rgb(var(--c-warm));
+  padding: 2.6cqh 2.4cqh;
+  border-bottom: 1px solid rgb(var(--c-accent) / 0.5);
+  white-space: nowrap;
+}
+.pd-table td {
+  padding: 2.4cqh;
+  border-bottom: 1px solid rgb(var(--c-ink) / 0.1);
+}
+.pd-table tbody tr:nth-child(odd) { background: rgb(var(--c-ink) / 0.03); }
+.pd-table td:first-child { font-weight: 500; }
+
+/* ------------------------------------------------------ hai cột đối nhau */
+.pd-compare-grid {
+  flex: 1 1 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4cqh;
+  align-content: center;
+  margin-top: 3cqh;
+}
+.pd-compare-col {
+  padding: 4cqh 4cqh 4.5cqh;
+  border-radius: 4cqh;
+  background: var(--card);
+  border: 1px solid var(--card-line);
+}
+/* Cột phải nhấn bằng viền cam để tách nghĩa với cột trái. */
+.pd-compare-b { border-color: rgb(var(--c-warm) / 0.55); }
+.pd-compare-list { margin: 2.4cqh 0 0; padding: 0 0 0 2.6cqh; display: grid; gap: 1.8cqh; }
+.pd-compare-list li { font-size: 2.4cqh; font-weight: 300; line-height: 1.45; }
+.pd-compare-list li::marker { color: rgb(var(--c-accent-pale)); }
+
+/* ------------------------------------------------------- sơ đồ tổ chức */
+.pd-org-body {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  margin-top: 1cqh;
+}
+.pd-org-root {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 3.4cqh;
+  padding: 2cqh 4.5cqh;
+  border-radius: 999px;
+  background: rgb(var(--c-accent-deep));
+  border: 1px solid rgb(var(--c-accent) / 0.6);
+}
+.pd-org-stem { width: 1px; height: 5cqh; background: rgb(var(--c-accent) / 0.55); }
+.pd-org-branches {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3.4cqh;
+  width: 100%;
+  position: relative;
+}
+/* đường ngang nối 3 nhánh */
+.pd-org-branches::before {
+  content: "";
+  position: absolute;
+  left: 16.6%; right: 16.6%; top: 0;
+  height: 1px;
+  background: rgb(var(--c-accent) / 0.55);
+}
+.pd-org-branch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 3.4cqh 2.6cqh;
+  border-radius: 3.4cqh;
+  background: var(--card);
+  border: 1px solid var(--card-line);
+}
+.pd-org-hot {
+  border-color: rgb(var(--c-warm) / 0.75);
+  background: rgb(var(--c-warm) / 0.08);
+}
+.pd-org-tick { width: 1px; height: 3.4cqh; background: rgb(var(--c-accent) / 0.55); margin-top: -3.4cqh; }
+.pd-org-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 3cqh;
+  margin: 2.4cqh 0 0;
+  color: rgb(var(--c-warm));
+}
+.pd-org-hot .pd-org-name { color: rgb(var(--c-warm)); }
+.pd-org-note { margin: 0.8cqh 0 0; font-size: 1.9cqh; font-weight: 300; color: var(--ink-dim); }
+.pd-org-units {
+  list-style: none;
+  margin: 2.2cqh 0 0;
+  padding: 0;
+  display: grid;
+  gap: 1.2cqh;
+  width: 100%;
+}
+.pd-org-units li {
+  font-size: 2.1cqh;
+  font-weight: 500;
+  padding: 1.2cqh 1.6cqh;
+  border-radius: 1.6cqh;
+  background: rgb(var(--c-ink) / 0.06);
+}
+
+/* ---------------------------------------------------------- closed loop */
+.pd-loop-body {
+  flex: 1 1 auto;
+  position: relative;
+  display: grid;
+  place-items: center;
+  margin-top: 1cqh;
+}
+/* Vòng quỹ đạo: SVG 3 cung + mũi tên chỉ chiều chu trình.
+   `color` điều khiển màu mũi tên qua `fill: currentColor` trong marker. */
+.pd-ring {
+  width: 52cqh;
+  height: 52cqh;
+  overflow: visible;
+  color: rgb(var(--c-accent-pale));
+}
+.pd-ring path {
+  fill: none;
+  stroke: rgb(var(--c-accent-pale) / 0.85);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+}
+.pd-loop-center {
+  position: absolute;
+  max-width: 22cqh;
+  text-align: center;
+  font-size: 2.1cqh;
+  font-weight: 500;
+  line-height: 1.35;
+  color: var(--ink-dim);
+}
+.pd-loop-node {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 1.8cqh;
+  padding: 2.2cqh 3cqh;
+  border-radius: 999px;
+  background: rgb(var(--c-panel));
+  border: 1px solid var(--card-line);
+  max-width: 42cqh;
+}
+/* 3 mắt xích: trên, phải-dưới, trái-dưới */
+.pd-loop-n1 { top: 0; left: 50%; transform: translate(-50%, -12%); }
+.pd-loop-n2 { bottom: 4cqh; right: 6cqh; }
+.pd-loop-n3 { bottom: 4cqh; left: 6cqh; }
+.pd-loop-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 2.7cqh;
+  margin: 0;
+  color: rgb(var(--c-warm));
+}
+.pd-loop-role { margin: 0.5cqh 0 0; font-size: 2cqh; font-weight: 300; line-height: 1.35; }
+
+/* -------------------------------------------------------------- collage */
+.pd-photo-grid {
+  flex: 1 1 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 1fr;
+  gap: 2cqh;
+  margin-top: 3cqh;
+  min-height: 0;
+}
+.pd-photo { margin: 0; min-height: 0; }
+.pd-photo-img { width: 100%; height: 100%; object-fit: cover; border-radius: 2cqh; display: block; }
+.pd-photo-empty {
+  display: grid;
+  place-items: center;
+  height: 100%;
+  padding: 1.6cqh;
+  text-align: center;
+  border-radius: 2cqh;
+  border: 1px dashed rgb(var(--c-accent) / 0.5);
+  background: rgb(var(--c-ink) / 0.03);
+  font-size: 1.8cqh;
+  line-height: 1.35;
+  color: var(--ink-faint);
+}

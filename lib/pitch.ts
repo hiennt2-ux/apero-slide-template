@@ -109,6 +109,84 @@ export interface PitchClosing {
   subtitle?: string;
 }
 
+// ===========================================================================
+//  LAYOUT THÊM — báo cáo, review, all-hands
+// ===========================================================================
+
+/** Một câu lớn chiếm cả slide. Dùng cho transition và câu chốt. */
+export interface PitchStatement {
+  kind: "statement";
+  kicker?: string;      // nhãn nhỏ phía trên
+  title: string;        // câu lớn
+  sub?: string;         // dòng nhỏ dưới
+  /** true = nền tối trơn, bỏ mọi hoạ tiết (dùng cho slide transition). */
+  bare?: boolean;
+}
+
+/** 1–3 con số rất lớn kèm nhãn. Dùng cho doanh thu, mục tiêu. */
+export interface PitchBigNum {
+  kind: "bignum";
+  title?: string;
+  lead?: string;
+  figures: { value: string; label: string; note?: string }[];
+  footnote?: string;
+}
+
+/** 4 khối số nhỏ hơn, xếp lưới. Dùng cho chỉ số nhân sự. */
+export interface PitchStats {
+  kind: "stats";
+  title: string;
+  lead?: string;
+  items: { value: string; label: string }[];
+  footnote?: string;
+}
+
+/** Bảng đơn giản. */
+export interface PitchTable {
+  kind: "table";
+  title: string;
+  lead?: string;
+  columns: string[];
+  rows: string[][];
+  footnote?: string;
+}
+
+/** Hai cột đối nhau. Dùng cho so sánh / "làm gì – không làm gì". */
+export interface PitchCompare {
+  kind: "compare";
+  title: string;
+  lead?: string;
+  left: { heading: string; items: string[] };
+  right: { heading: string; items: string[] };
+}
+
+/** Sơ đồ tổ chức: các nhánh, mỗi nhánh vài đơn vị. */
+export interface PitchOrgChart {
+  kind: "orgchart";
+  title: string;
+  root: string;
+  branches: { name: string; note?: string; units: string[]; highlight?: boolean }[];
+  footnote?: string;
+}
+
+/** Vòng khép kín: các mắt xích nối nhau thành chu trình. */
+export interface PitchLoop {
+  kind: "loop";
+  title: string;
+  lead?: string;
+  nodes: { name: string; role: string }[];
+  center?: string;
+  footnote?: string;
+}
+
+/** Lưới ảnh (photo collage). Ảnh chưa có thì hiện khung mô tả. */
+export interface PitchGallery {
+  kind: "gallery";
+  title: string;
+  lead?: string;
+  photos: { image?: string; caption?: string }[];
+}
+
 export type PitchSlide =
   | PitchCover
   | PitchNumbers
@@ -120,7 +198,15 @@ export type PitchSlide =
   | PitchTeam
   | PitchRoadmap
   | PitchAudience
-  | PitchClosing;
+  | PitchClosing
+  | PitchStatement
+  | PitchBigNum
+  | PitchStats
+  | PitchTable
+  | PitchCompare
+  | PitchOrgChart
+  | PitchLoop
+  | PitchGallery;
 
 // ===========================================================================
 //  NỘI DUNG
@@ -372,6 +458,97 @@ export const pitchDeck: PitchSlide[] = [
   },
 
   // -------------------------------------------------------------- 11 kết
+  // ═══════════════════════════════════════════════════════════════════════
+  //  DEMO 8 LAYOUT THÊM
+  //  Phần này chỉ để cho thấy 8 layout còn lại trông thế nào. Xoá cả khối
+  //  nếu bạn không cần — bộ pitch 11 slide phía trên vẫn chạy bình thường.
+  //  Nội dung ở đây là trung tính, thay bằng nội dung của bạn.
+  // ═══════════════════════════════════════════════════════════════════════
+  {
+    kind: "statement",
+    title: "Còn 8 layout nữa cho báo cáo và review.",
+    sub: "Các slide sau minh hoạ từng layout. Xem interface trong lib/pitch.ts.",
+    bare: true,
+  },
+  {
+    kind: "bignum",
+    title: "bignum — số rất lớn",
+    lead: "Một tới ba con số chiếm cả slide. Dùng cho doanh thu, tăng trưởng, mục tiêu.",
+    figures: [
+      { value: "1B+", label: "lượt tải", note: "trong năm 2025" },
+      { value: "130M+", label: "người dùng hoạt động hàng tháng", note: "trên 150+ quốc gia" },
+      { value: "300+", label: "sản phẩm đã ra thị trường", note: "trong 6 năm" },
+    ],
+    footnote: "Trường footnote hiện ở đáy slide, dùng cho nguồn số liệu hoặc ghi chú.",
+  },
+  {
+    kind: "stats",
+    title: "stats — lưới bốn khối số",
+    lead: "Nhỏ hơn bignum, dùng khi cần trưng nhiều chỉ số cùng lúc.",
+    items: [
+      { value: "Top 20", label: "Google Play Non-Game toàn cầu" },
+      { value: "Top 3", label: "Đông Nam Á" },
+      { value: "150+", label: "quốc gia có người dùng" },
+      { value: "6", label: "năm hoạt động" },
+    ],
+  },
+  {
+    kind: "table",
+    title: "table — bảng",
+    lead: "Bảng đơn giản, tự động kẻ dòng chẵn/lẻ. Cột đầu in đậm.",
+    columns: ["Hạng mục", "Chỉ tiêu", "Thực hiện", "Ghi chú"],
+    rows: [
+      ["Hạng mục thứ nhất", "100", "112", "Vượt chỉ tiêu"],
+      ["Hạng mục thứ hai", "100", "96", "Gần đạt"],
+      ["Hạng mục thứ ba", "100", "104", "Đạt"],
+    ],
+    footnote: "Giữ bảng tối đa 5–6 dòng. Dài hơn thì tách thành hai slide.",
+  },
+  {
+    kind: "compare",
+    title: "compare — hai cột đối nhau",
+    lead: "Dùng khi cần đặt hai thứ cạnh nhau: trước/sau, làm/không làm, ta/thị trường.",
+    left: {
+      heading: "Cột bên trái",
+      items: ["Ý thứ nhất", "Ý thứ hai", "Ý thứ ba"],
+    },
+    right: {
+      heading: "Cột bên phải",
+      items: ["Ý đối lại thứ nhất", "Ý đối lại thứ hai"],
+    },
+  },
+  {
+    kind: "orgchart",
+    title: "orgchart — sơ đồ tổ chức",
+    root: "Tên tổ chức",
+    branches: [
+      { name: "Nhánh một", note: "Mô tả ngắn về nhánh", units: ["Đơn vị A", "Đơn vị B", "Đơn vị C"] },
+      { name: "Nhánh hai", note: "Mô tả ngắn về nhánh", units: ["Đơn vị D", "Đơn vị E"] },
+      { name: "Nhánh ba", note: "Đặt highlight: true để làm nổi", units: ["Đơn vị F"], highlight: true },
+    ],
+    footnote: "Ba nhánh là vừa khung. Nhiều hơn thì chữ bị nhỏ.",
+  },
+  {
+    kind: "loop",
+    title: "loop — vòng khép kín",
+    lead: "Ba mắt xích nối nhau thành chu trình, có mũi tên chỉ chiều.",
+    nodes: [
+      { name: "Mắt xích một", role: "Vai trò của mắt xích này trong vòng" },
+      { name: "Mắt xích hai", role: "Vai trò của mắt xích này trong vòng" },
+      { name: "Mắt xích ba", role: "Vai trò của mắt xích này trong vòng" },
+    ],
+    center: "Chữ ở giữa vòng — dùng để nói vòng lặp này tạo ra giá trị gì.",
+  },
+  {
+    kind: "gallery",
+    title: "gallery — lưới ảnh",
+    lead: "Tám ô ảnh xếp 4×2. Chưa có ảnh thì hiện khung mô tả như dưới đây.",
+    photos: [
+      { caption: "Ảnh 1" }, { caption: "Ảnh 2" }, { caption: "Ảnh 3" }, { caption: "Ảnh 4" },
+      { caption: "Ảnh 5" }, { caption: "Ảnh 6" }, { caption: "Ảnh 7" }, { caption: "Ảnh 8" },
+    ],
+  },
+
   {
     kind: "closing",
     title: "Thank You!",

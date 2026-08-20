@@ -4,7 +4,7 @@ Bộ slide thuyết trình **chạy trên web** (Next.js + React) thay cho Power
 nội dung trong một file, là có bộ slide của bạn — không phải canh lại thiết kế.
 
 Giao diện theo **Apero Brand Guideline 4.0**: tím `#4E018F`, cam `#F07D33`, tiêu đề font Clash,
-nội dung Montserrat. Có sẵn **11 layout pitch deck** và **21 layout cho bài nói / workshop**.
+nội dung Montserrat. Có sẵn **19 layout pitch / báo cáo** và **21 layout cho bài nói / workshop**.
 
 Song ngữ Việt – English sẵn trong máy: một nút bấm là đổi toàn bộ slide.
 
@@ -78,7 +78,7 @@ placeholder: "Ảnh sản phẩm, chụp ngang", // khung tạm, hiện mô tả
 
 ---
 
-## 11 layout của pitch deck
+## 19 layout của bộ pitch / báo cáo
 
 | `kind` | Layout |
 |---|---|
@@ -93,6 +93,22 @@ placeholder: "Ảnh sản phẩm, chụp ngang", // khung tạm, hiện mô tả
 | `roadmap` | Lộ trình ngang, nhãn xen kẽ trên/dưới đường kẻ |
 | `audience` | Đoạn dẫn rộng + 3 thẻ |
 | `closing` | Logo + lời cảm ơn |
+
+Thêm 8 layout cho báo cáo, review, all-hands:
+
+| `kind` | Layout |
+|---|---|
+| `statement` | Một câu lớn chiếm cả slide. `bare: true` = nền trơn, dùng làm slide chuyển phần |
+| `bignum` | 1–3 con số rất lớn kèm nhãn. Ba cột chia chung hàng nên nhãn luôn thẳng |
+| `stats` | Lưới 4 khối số nhỏ hơn, dùng khi cần trưng nhiều chỉ số |
+| `table` | Bảng, tự kẻ dòng chẵn/lẻ. Giữ tối đa 5–6 dòng |
+| `compare` | Hai cột đối nhau: trước/sau, làm/không làm |
+| `orgchart` | Sơ đồ tổ chức 3 nhánh, `highlight: true` làm nổi một nhánh |
+| `loop` | Vòng khép kín 3 mắt xích, có mũi tên chỉ chiều |
+| `gallery` | Lưới ảnh 4×2, chưa có ảnh thì hiện khung mô tả |
+
+**Slide 11–18 trong deck mẫu là phần demo 8 layout này.** Xoá cả khối đó trong `lib/pitch.ts`
+nếu không cần — bộ pitch 10 slide phía trên vẫn chạy bình thường.
 
 Bộ layout thứ hai (cho bài nói, workshop, bài giảng) có thêm 21 `kind`: `section` `bullets`
 `steps` `stats` `columns` `tools` `gitflow` `compare` `image` `split` `quote` `gallery`
