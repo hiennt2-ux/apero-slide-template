@@ -951,14 +951,18 @@
   stroke-width: 1.6;
   stroke-linecap: round;
 }
+/* Chữ giữa vòng. Vòng rộng 52cqh nên ở giữa cho phép tới ~40cqh; bó ở 22cqh
+   như trước làm chữ vỡ 4 dòng và dòng cuối mồ côi một từ. Nới lên 31cqh (vẫn
+   còn lề rõ tới cung) + text-wrap: balance để các dòng dài đều nhau. */
 .pd-loop-center {
   position: absolute;
-  max-width: 22cqh;
+  max-width: 31cqh;
   text-align: center;
-  font-size: 2.1cqh;
+  font-size: 2.3cqh;
   font-weight: 500;
-  line-height: 1.35;
+  line-height: 1.45;
   color: var(--ink-dim);
+  text-wrap: balance;
 }
 .pd-loop-node {
   position: absolute;
