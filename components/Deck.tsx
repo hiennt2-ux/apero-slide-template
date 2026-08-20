@@ -32,15 +32,27 @@ const IS_PITCH = usesPitchDeck();
 
 // Slide nào trình bày TRÀN VIỀN (chiếm trọn màn hình, không khung 16:9).
 //
-// BẮT BUỘC tràn viền với mọi slide có NỀN RIÊNG (tự vẽ nền bằng ::before thay
-// vì dùng nền .bg dùng chung): nếu để trong khung 16:9 thì nền riêng đó bị bó
-// lại, còn quanh nó là nền .bg khác màu — nhìn thành "một tấm ảnh dán lên nền".
-// Hiện có: cover (nền tím gradient) và numbers (nền tím nửa trái + đen nửa phải).
+// QUY TẮC: slide nào **tự vẽ nền phủ cả slide** thì BẮT BUỘC tràn viền. Nếu để
+// trong khung 16:9 thì nền riêng đó bị bó lại, còn quanh khung là nền .bg khác
+// màu — nhìn thành "một tấm ảnh dán lên nền".
 //
-// Các slide còn lại dùng chung nền .bg nên nằm trong khung 16:9 vẫn liền mạch,
-// và giữ khung giúp không bị méo tỉ lệ ở màn không phải 16:9 (đã thử bật tràn
-// viền cho cả 11 kind: ở màn 5:4 biểu đồ bị kéo cao, nhãn trục chạm thanh nav).
-const FULL_BLEED_KINDS = new Set(["cover", "numbers"]);
+// Hiện có 3 trường hợp:
+//   • cover      — nền là ảnh bg-cover.jpg
+//   • numbers    — nền là ảnh bg-arc.jpg
+//   • statement  — CHỈ khi bare: true (nền tối trơn). statement thường dùng nền
+//                  .bg chung nên giữ khung.
+//
+// Vì điều kiện phụ thuộc cả trường của slide (không chỉ kind) nên dùng hàm thay
+// vì một Set các kind.
+//
+// Các slide còn lại dùng chung nền .bg nên nằm trong khung vẫn liền mạch, và
+// giữ khung giúp không bị méo tỉ lệ ở màn không phải 16:9 (đã thử bật tràn viền
+// cho tất cả: ở màn 5:4 biểu đồ bị kéo cao, nhãn trục chạm thanh điều khiển).
+function isFullBleed(slide: { kind: string; bare?: boolean }): boolean {
+  if (slide.kind === "cover" || slide.kind === "numbers") return true;
+  if (slide.kind === "statement" && slide.bare) return true;
+  return false;
+}
 
 const LANG_KEY = "vibecode-lang";
 
@@ -173,7 +185,7 @@ export default function Deck() {
   const ribbon = !IS_PITCH && CONTENT_KINDS.has(kind) ? "ribbon-subtle" : "";
   // Slide tràn viền: chiếm trọn màn hình, không còn khung 16:9 và không thấy
   // nền phía sau. Dùng cho trang bìa (và trang kết) của bộ pitch.
-  const bleed = IS_PITCH && FULL_BLEED_KINDS.has(kind) ? "stage-bleed" : "";
+  const bleed = IS_PITCH && isFullBleed(current as { kind: string; bare?: boolean }) ? "stage-bleed" : "";
 
   return (
     <div className={`app ${theme} ${ribbon}`}>

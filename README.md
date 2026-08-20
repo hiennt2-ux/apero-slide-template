@@ -186,15 +186,23 @@ Thay ảnh của bạn: ghi đè file trong `public/pitch/` (giữ nguyên tên)
 
 ## Slide tràn màn hình
 
-Trang bìa và trang `numbers` chiếm **trọn màn hình**, không có lề. Các trang còn lại nằm trong
-khung tỉ lệ 16:9.
+**Quy tắc:** slide nào **tự vẽ nền phủ cả slide** thì phải chiếm **trọn màn hình**. Nếu bó nó
+trong khung 16:9 thì nền riêng chỉ phủ trong khung, quanh khung là nền chung khác màu → nhìn
+thành "một tấm ảnh dán lên nền".
 
-Lý do: hai slide đó **tự vẽ nền riêng**. Nếu bó chúng trong khung 16:9 thì nền riêng chỉ phủ
-trong khung, quanh khung là nền chung khác màu → nhìn thành "một tấm ảnh dán lên nền". Các slide
-khác dùng nền chung nên nằm trong khung vẫn liền mạch, và giữ khung giúp không bị méo tỉ lệ ở
-màn hình không phải 16:9.
+Hiện có 3 trường hợp tràn màn hình:
 
-Bật/tắt cho slide nào: sửa `FULL_BLEED_KINDS` trong `components/Deck.tsx`.
+| Slide | Vì sao |
+|---|---|
+| `cover` | Nền là ảnh `bg-cover.jpg` |
+| `numbers` | Nền là ảnh `bg-arc.jpg` |
+| `statement` **chỉ khi** `bare: true` | Nền tối trơn. `statement` thường dùng nền chung nên giữ khung |
+
+Các slide còn lại dùng nền `.bg` chung nên nằm trong khung vẫn liền mạch, và giữ khung giúp
+không bị méo tỉ lệ ở màn hình không phải 16:9.
+
+Sửa quy tắc: hàm `isFullBleed()` trong `components/Deck.tsx`. Dùng hàm thay vì danh sách `kind`
+vì điều kiện phụ thuộc cả trường của slide (như `bare`), không chỉ riêng `kind`.
 
 ---
 
