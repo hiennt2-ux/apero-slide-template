@@ -45,6 +45,28 @@ function Frame({
   );
 }
 
+// Dải đường nối của sơ đồ tổ chức: cuống từ root xuống, thanh ngang, rồi một
+// cuống xuống mỗi nhánh.
+//
+// Các cuống nằm trong một GRID GIỐNG HỆT grid của các thẻ (cùng số cột, cùng
+// gap) nên tự thẳng tâm thẻ — không phải tính vị trí theo phần trăm, vốn sai vì
+// phần trăm không trừ đi khoảng cách giữa các thẻ.
+function OrgConnector({ count }: { count: number }) {
+  return (
+    <div className="pd-org-link" style={{ ["--n" as string]: count }} aria-hidden>
+      <span className="pd-org-link-stem" />
+      <div className="pd-org-link-row">
+        {Array.from({ length: count }, (_, i) => (
+          <span
+            key={i}
+            className={`pd-org-link-cell${i === count - 1 ? " is-last" : ""}`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 // Vòng closed loop: 3 cung nối 3 mắt xích, mỗi cung có mũi tên chỉ chiều.
 // Mắt xích nằm ở -90° (trên), 30° (phải-dưới), 150° (trái-dưới); mỗi cung chừa
 // 18° hai đầu để mũi tên không chạm vào thẻ.
@@ -466,11 +488,10 @@ export default function PitchSlide({ slide, lang }: { slide: P; lang: Lang }) {
           </header>
           <div className="pd-org-body">
             <div className="pd-org-root">{slide.root}</div>
-            <span className="pd-org-stem" aria-hidden />
+            <OrgConnector count={slide.branches.length} />
             <div className="pd-org-branches">
               {slide.branches.map((b, i) => (
                 <div className={`pd-org-branch ${b.highlight ? "pd-org-hot" : ""}`} key={i}>
-                  <span className="pd-org-tick" aria-hidden />
                   <h3 className="pd-org-name">{b.name}</h3>
                   {b.note && <p className="pd-org-note">{b.note}</p>}
                   <ul className="pd-org-units">

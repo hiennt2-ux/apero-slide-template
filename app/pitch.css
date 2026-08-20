@@ -802,7 +802,6 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0;
   margin-top: 1cqh;
 }
 .pd-org-root {
@@ -814,21 +813,83 @@
   background: rgb(var(--c-accent-deep));
   border: 1px solid rgb(var(--c-accent) / 0.6);
 }
-.pd-org-stem { width: 1px; height: 5cqh; background: rgb(var(--c-accent) / 0.55); }
+
+/* Dải đường nối — chiếm chiều cao riêng giữa root và các thẻ, nên đường kẻ
+   không bao giờ chạy đè lên thẻ. */
+.pd-org-link {
+  position: relative;
+  width: 100%;
+  height: 9cqh;
+  flex: 0 0 auto;
+}
+/* Cuống từ root đi xuống, dừng ở giữa dải. */
+.pd-org-link-stem {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 1px;
+  height: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(180deg,
+    rgb(var(--c-accent) / 0.25),
+    rgb(var(--c-accent-pale) / 0.85));
+}
+/* Nửa dưới của dải: grid TRÙNG KHỚP grid các thẻ (cùng cột, cùng gap). */
+.pd-org-link-row {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  bottom: 0;
+  display: grid;
+  grid-template-columns: repeat(var(--n), 1fr);
+  gap: var(--org-gap);
+}
+.pd-org-link-cell { position: relative; }
+/* Cuống xuống thẻ — ở tâm ô nên tự thẳng tâm thẻ. */
+.pd-org-link-cell::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  transform: translateX(-50%);
+  background: linear-gradient(180deg,
+    rgb(var(--c-accent-pale) / 0.85),
+    rgb(var(--c-accent) / 0.3));
+}
+/* Thanh ngang: mỗi ô vẽ đoạn từ tâm mình sang tâm ô kế tiếp.
+   Dài = nửa ô + gap + nửa ô, nên right = -(50% + gap). Ô cuối không vẽ. */
+.pd-org-link-cell::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  right: calc(-50% - var(--org-gap));
+  height: 1px;
+  background: rgb(var(--c-accent-pale) / 0.7);
+}
+.pd-org-link-cell.is-last::before { display: none; }
+/* Điểm nối phát sáng ở mỗi chỗ rẽ nhánh — cho thấy đây là chỗ chia có chủ ý,
+   không phải hai đường tình cờ cắt nhau. Vẽ bằng background của chính ô (không
+   cần thêm phần tử) vì ::before và ::after đã dùng cho hai đường kẻ. */
+.pd-org-link-cell {
+  background-image: radial-gradient(circle,
+    rgb(var(--c-accent-pale)) 0 22%,
+    rgb(var(--c-accent) / 0.55) 22% 42%,
+    transparent 46%);
+  background-size: 1.1cqh 1.1cqh;
+  background-position: center top;
+  background-repeat: no-repeat;
+}
+
+.pd-org-body { --org-gap: 3.4cqh; }
 .pd-org-branches {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 3.4cqh;
+  gap: var(--org-gap);
   width: 100%;
-  position: relative;
-}
-/* đường ngang nối 3 nhánh */
-.pd-org-branches::before {
-  content: "";
-  position: absolute;
-  left: 16.6%; right: 16.6%; top: 0;
-  height: 1px;
-  background: rgb(var(--c-accent) / 0.55);
 }
 .pd-org-branch {
   display: flex;
@@ -844,15 +905,13 @@
   border-color: rgb(var(--c-warm) / 0.75);
   background: rgb(var(--c-warm) / 0.08);
 }
-.pd-org-tick { width: 1px; height: 3.4cqh; background: rgb(var(--c-accent) / 0.55); margin-top: -3.4cqh; }
 .pd-org-name {
   font-family: var(--font-display);
   font-weight: 700;
   font-size: 3cqh;
-  margin: 2.4cqh 0 0;
+  margin: 0;
   color: rgb(var(--c-warm));
 }
-.pd-org-hot .pd-org-name { color: rgb(var(--c-warm)); }
 .pd-org-note { margin: 0.8cqh 0 0; font-size: 1.9cqh; font-weight: 300; color: var(--ink-dim); }
 .pd-org-units {
   list-style: none;
