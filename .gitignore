@@ -26,3 +26,6 @@ Thumbs.db
 /Material
 *.pptx
 *.zip
+
+# Generated local review captures (published previews live in public/review/)
+/review/
