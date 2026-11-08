@@ -1,0 +1,126 @@
+[
+  {
+    "kind": "cover",
+    "title": "FenaPix: kế hoạch cải thiện trải nghiệm chỉnh sửa và xuất ảnh",
+    "subtitle": "Thử sức chứa nội dung · Đề xuất minh họa, chưa phải kế hoạch đã phê duyệt."
+  },
+  {
+    "kind": "cards",
+    "title": "Ba ưu tiên giúp người dùng bắt đầu nhanh hơn, chỉnh ảnh tự tin hơn và lưu kết quả thành công",
+    "lead": "Mỗi ưu tiên gồm vấn đề cần kiểm chứng, hướng thiết kế và điều kiện đánh giá.",
+    "cards": [
+      {
+        "heading": "Rút ngắn hành trình đến lần chỉnh sửa đầu tiên",
+        "body": "Người dùng nên được chọn ảnh ngay sau khi mở ứng dụng. Phần giới thiệu công cụ xuất hiện theo ngữ cảnh, khi họ bắt đầu thao tác. Cần kiểm tra cả trường hợp chưa cấp quyền, chỉ cấp quyền cho một số ảnh và ảnh đang lưu trên đám mây. Đánh giá bằng khả năng hoàn thành tác vụ mà không cần người hướng dẫn."
+      },
+      {
+        "heading": "Giữ quyền chủ động khi thử nhiều hiệu ứng",
+        "body": "Mỗi thay đổi cần có xem trước, so sánh trước–sau và hoàn tác rõ ràng. Khi chuyển công cụ, kết quả trước đó phải được giữ hoặc có lời giải thích cụ thể. Thử với người dùng mới, người chỉnh nhiều bước và người quay lại sau khi ứng dụng chạy nền để phát hiện mất trạng thái."
+      },
+      {
+        "heading": "Làm rõ kết quả xuất ảnh và cách khôi phục khi lỗi",
+        "body": "Trước khi xuất, người dùng cần hiểu chất lượng, định dạng và nơi lưu. Khi tác vụ kéo dài, giao diện phải thể hiện tiến trình. Nếu hết dung lượng hoặc tác vụ thất bại, cần giữ bản chỉnh sửa và cho thử lại. Chỉ báo thành công khi ảnh đã lưu được, đồng thời cung cấp cách mở ảnh vừa tạo."
+      }
+    ]
+  },
+  {
+    "kind": "table",
+    "title": "Ma trận kiểm tra hành trình trước khi phát hành",
+    "lead": "Tám tình huống trong cùng một buổi review.",
+    "columns": [
+      "Tình huống",
+      "Hành vi mong đợi",
+      "Bằng chứng",
+      "Ưu tiên"
+    ],
+    "rows": [
+      [
+        "Chưa cấp quyền ảnh",
+        "Giải thích và cho thử lại",
+        "Video thao tác",
+        "Cao"
+      ],
+      [
+        "Chỉ cấp một số ảnh",
+        "Chọn ảnh được phép",
+        "Thiết bị thật",
+        "Cao"
+      ],
+      [
+        "Ảnh trên đám mây",
+        "Có tiến trình tải và xử lý lỗi",
+        "Log và video",
+        "Vừa"
+      ],
+      [
+        "Ứng dụng chạy nền",
+        "Khôi phục bản chỉnh sửa",
+        "So sánh trạng thái",
+        "Cao"
+      ],
+      [
+        "Hoàn tác nhiều bước",
+        "Trở lại đúng trạng thái",
+        "Chuỗi thao tác",
+        "Cao"
+      ],
+      [
+        "Thiếu dung lượng",
+        "Giữ bản sửa và cho thử lại",
+        "Thiết bị đầy",
+        "Cao"
+      ],
+      [
+        "Mạng gián đoạn",
+        "Giải thích tác vụ cần mạng",
+        "Ngắt và nối mạng",
+        "Vừa"
+      ],
+      [
+        "Xuất ảnh thành công",
+        "Mở ảnh ở nơi đã lưu",
+        "Tệp và vị trí lưu",
+        "Cao"
+      ]
+    ],
+    "footnote": "Nội dung minh họa; không phải lỗi đã xác nhận của FenaPix."
+  },
+  {
+    "kind": "roadmap",
+    "title": "Bốn tuần để kiểm chứng và quyết định phạm vi cải thiện",
+    "milestones": [
+      {
+        "tag": "TUẦN 1",
+        "heading": "Quan sát hành trình hiện tại",
+        "body": "Thử từ chọn ảnh đến lưu ảnh; ghi lại điểm dừng và câu hỏi."
+      },
+      {
+        "tag": "TUẦN 2",
+        "heading": "Thiết kế phương án ưu tiên",
+        "body": "Chọn vấn đề có bằng chứng, dựng hai phương án và cách đánh giá."
+      },
+      {
+        "tag": "TUẦN 3",
+        "heading": "Thử nghiệm và điều chỉnh",
+        "body": "Kiểm tra quyền ảnh, nhiều bước chỉnh và khôi phục khi lỗi."
+      },
+      {
+        "tag": "TUẦN 4",
+        "heading": "Chốt phạm vi triển khai",
+        "body": "Đối chiếu kết quả và thống nhất điều kiện phát hành."
+      }
+    ]
+  },
+  {
+    "kind": "statement",
+    "kicker": "NGUYÊN TẮC RA QUYẾT ĐỊNH",
+    "title": "Hiểu vấn đề trước.\nChọn giải pháp sau.",
+    "sub": "Nội dung có ký tự xuống dòng giữa hai câu.",
+    "bare": true
+  },
+  {
+    "kind": "closing",
+    "title": "Xem phương án và góp ý cho trải nghiệm tiếp theo",
+    "subtitle": "CTA minh họa · Cần gắn đích tài liệu khi sử dụng thật"
+  }
+]
