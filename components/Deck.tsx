@@ -4,7 +4,8 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { getDeck, type Lang } from "@/lib/deck";
 import { ui } from "@/lib/i18n";
 import { themeClass, usesPitchDeck } from "@/lib/theme";
-import { getPitchDeck } from "@/lib/pitch";
+import { getPitchDeck, type PitchSlide as PitchSlideData } from "@/lib/pitch";
+import { preparePitchDeck, type PresentationSlide } from "@/lib/paginate";
 import Background from "./Background";
 import Slide from "./Slide";
 import PitchSlide from "./PitchSlide";
@@ -56,7 +57,7 @@ function isFullBleed(slide: { kind: string; bare?: boolean }): boolean {
 
 const LANG_KEY = "vibecode-lang";
 
-export default function Deck() {
+export default function Deck({ pitchSlides }: { pitchSlides?: PitchSlideData[] } = {}) {
   const [i, setI] = useState(0);
   const [zoom, setZoom] = useState<ZoomMedia>(null);
   const [lang, setLang] = useState<Lang>("vi");
@@ -70,8 +71,8 @@ export default function Deck() {
   }, []);
 
   const deck = useMemo(
-    () => (IS_PITCH ? getPitchDeck(lang) : getDeck(lang)),
-    [lang],
+    () => (IS_PITCH ? preparePitchDeck(pitchSlides ?? getPitchDeck(lang)) : getDeck(lang)),
+    [lang, pitchSlides],
   );
   const t = ui(lang);
   const total = deck.length;
@@ -90,7 +91,7 @@ export default function Deck() {
       }
     };
     // đường dẫn ảnh giống nhau ở mọi ngôn ngữ
-    walk(IS_PITCH ? getPitchDeck("vi") : getDeck("vi"));
+    walk(IS_PITCH ? pitchSlides ?? getPitchDeck("vi") : getDeck("vi"));
     urls.forEach((u) => {
       if (/\.(mp4|webm)$/i.test(u)) {
         const link = document.createElement("link");
@@ -104,7 +105,7 @@ export default function Deck() {
         img.src = u;
       }
     });
-  }, []);
+  }, [pitchSlides]);
 
   const toggleLang = useCallback(() => {
     setLang((prev) => {
@@ -120,10 +121,15 @@ export default function Deck() {
 
   // Deep-link: mở #3 để vào thẳng slide 3 (tiện trình chiếu / kiểm tra).
   useEffect(() => {
-    const fromHash = parseInt(window.location.hash.slice(1), 10);
-    if (!Number.isNaN(fromHash)) {
-      setI(Math.min(total - 1, Math.max(0, fromHash - 1)));
-    }
+    const readHash = () => {
+      const fromHash = parseInt(window.location.hash.slice(1), 10);
+      if (!Number.isNaN(fromHash)) {
+        setI(Math.min(total - 1, Math.max(0, fromHash - 1)));
+      }
+    };
+    readHash();
+    window.addEventListener("hashchange", readHash);
+    return () => window.removeEventListener("hashchange", readHash);
   }, [total]);
 
   const go = useCallback(
@@ -167,6 +173,7 @@ export default function Deck() {
 
   // Bấm vào ảnh/video có class .zoomable -> mở lightbox (không chuyển slide).
   const onStageClick = useCallback((e: React.MouseEvent) => {
+    if ((e.target as HTMLElement).closest("a, button")) return;
     const el = (e.target as HTMLElement).closest(".zoomable");
     if (el) {
       e.stopPropagation();
@@ -179,6 +186,7 @@ export default function Deck() {
 
   const pct = total > 1 ? (i / (total - 1)) * 100 : 100;
   const current = deck[Math.min(i, total - 1)];
+  const presentation = IS_PITCH ? current as PresentationSlide : null;
   const kind = current.kind;
   // Theme lấy từ lib/theme.ts — đổi ACTIVE_THEME ở đó là đổi cả bộ slide.
   const theme = themeClass();
@@ -195,12 +203,18 @@ export default function Deck() {
       <main className={`stage ${IS_PITCH ? "stage-pitch" : ""} ${bleed}`} onClick={onStageClick}>
         {/* key buộc remount để chạy lại animation mỗi lần chuyển slide / đổi ngôn ngữ */}
         {IS_PITCH ? (
-          <div className="pd-stage">
+          <div className="pd-stage" data-source-slide={presentation!.sourceIndex + 1} data-part={presentation!.part + 1}>
             <PitchSlide
               key={`${lang}-${i}`}
               slide={current as import("@/lib/pitch").PitchSlide}
               lang={lang}
             />
+            {presentation!.parts > 1 && (
+              <div className="pd-page-label">
+                {lang === "vi" ? "Nội dung" : "Source"} {presentation!.sourceIndex + 1}
+                {" · "}{lang === "vi" ? "Phần" : "Part"} {presentation!.part + 1}/{presentation!.parts}
+              </div>
+            )}
           </div>
         ) : (
           <Slide

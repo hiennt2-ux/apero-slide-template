@@ -114,7 +114,7 @@ export default function PitchSlide({ slide, lang }: { slide: P; lang: Lang }) {
     // ------------------------------------------------------------------ bìa
     case "cover":
       return (
-        <section className="pd-slide pd-cover">
+        <section className={`pd-slide pd-cover ${slide.title.length > 38 ? "pd-cover-long" : ""}`}>
           <div className="pd-cover-left">
             <Logo className="pd-logo-cover" />
             <h1 className="pd-cover-title">{slide.title}</h1>
@@ -181,7 +181,7 @@ export default function PitchSlide({ slide, lang }: { slide: P; lang: Lang }) {
     // ------------------------------------------------------------ 3 thẻ dọc
     case "cards":
       return (
-        <section className="pd-slide pd-cards">
+        <section className={`pd-slide pd-cards ${slide.layout === "detail" ? "pd-cards-detail" : ""}`}>
           <header className="pd-head">
             <h2 className="pd-title">{slide.title}</h2>
             <Motif />
@@ -190,7 +190,7 @@ export default function PitchSlide({ slide, lang }: { slide: P; lang: Lang }) {
           <div className="pd-card-grid">
             {slide.cards.map((c, i) => (
               <article className="pd-card" key={i}>
-                <Orb n={two(i)} size="lg" />
+                <Orb n={two(i + (slide.cardOffset ?? 0))} size="lg" />
                 <h3 className="pd-card-heading">{c.heading}</h3>
                 <p className="pd-card-body">{c.body}</p>
               </article>
@@ -348,7 +348,10 @@ export default function PitchSlide({ slide, lang }: { slide: P; lang: Lang }) {
                   </div>
                   <span className="pd-stop-tick" aria-hidden />
                 </div>
-                <Orb n={m.tag} size="lg" />
+                <div className="pd-stop-marker">
+                  <Orb n={two(i)} size="lg" />
+                  <span className="pd-stop-tag">{m.tag}</span>
+                </div>
               </div>
             ))}
           </div>
@@ -558,10 +561,13 @@ export default function PitchSlide({ slide, lang }: { slide: P; lang: Lang }) {
     // --------------------------------------------------------------- kết
     case "closing":
       return (
-        <section className="pd-slide pd-closing">
+        <section className={`pd-slide pd-closing ${slide.title.length > 38 ? "pd-closing-long" : ""}`}>
           <Logo className="pd-logo-closing" />
           <h1 className="pd-closing-title">{slide.title}</h1>
           {slide.subtitle && <p className="pd-closing-sub">{slide.subtitle}</p>}
+          {slide.action && /^(https?:\/\/|\/(?!\/))/.test(slide.action.href) && (
+            <a className="pd-action" href={slide.action.href}>{slide.action.label}</a>
+          )}
         </section>
       );
   }

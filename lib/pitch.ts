@@ -44,6 +44,8 @@ export interface PitchStory extends Img {
 
 /** 3 thẻ dọc: quả cầu số + tiêu đề cam + nội dung. */
 export interface PitchCards {
+  layout?: "detail";
+  cardOffset?: number;
   kind: "cards";
   title: string;
   lead?: string;
@@ -107,6 +109,7 @@ export interface PitchClosing {
   kind: "closing";
   title: string;
   subtitle?: string;
+  action?: { label: string; href: string };
 }
 
 // ===========================================================================

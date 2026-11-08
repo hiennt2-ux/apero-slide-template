@@ -233,7 +233,7 @@ public/
 
 ## Yêu cầu
 
-Node.js 18 trở lên. Không cần cài gì khác.
+Node.js 24 (xem `.nvmrc`). Không cần cài gì khác.
 
 ## Giấy phép
 
@@ -248,3 +248,15 @@ Mã nguồn: MIT — xem [LICENSE](LICENSE).
 
 Font đi kèm giữ giấy phép gốc: Clash Display (ITF Free Font License), Montserrat và
 Be Vietnam Pro (SIL Open Font License 1.1).
+
+## Nội dung dài và bản so sánh trước–sau
+
+Dùng **Node.js 24** (`.nvmrc`), chạy `npm test` và `npm run build` để kiểm tra.
+Bộ pitch mặc định vẫn dùng nội dung trong `lib/pitch.ts`.
+
+- `/stress`: bài thử FenaPix với tiêu đề dài, thẻ nhiều chữ và bảng 8 hàng.
+- `/review/compare.html`: ảnh trước–sau; chọn từng phần để xem các trang được tách.
+
+Thẻ dài và bảng nhiều hàng được chia trang trước khi trình bày. Bìa hỗ trợ tiêu đề dài,
+roadmap tách nhãn thời gian khỏi số thứ tự, statement giữ xuống dòng, closing hỗ trợ nút liên kết.
+Xem [cách hoạt động, kiểm tra và giới hạn](docs/content-layouts.md).
